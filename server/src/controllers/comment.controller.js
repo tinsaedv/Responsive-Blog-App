@@ -77,43 +77,6 @@ async function deleteComment(req, res) {
   }
 }
 
-// async function getCommentsByArticleId(req, res) {
-//   const { articleId } = req.params;
-//   try {
-//     const comments = await CommentModel.aggregate([
-//       { $match: { articleId: new mongoose.Types.ObjectId(articleId) } },
-//       {
-//         $lookup: {
-//           from: 'articles',
-//           localField: 'commentAuthorId',
-//           foreignField: '_id',
-//           as: 'commentAuthor',
-//         },
-//       },
-
-//       {
-//         $unwind: '$commentAuthor',
-//       },
-//       {
-//         $project: {
-//           _id: 1,
-//           text: 1,
-//           author: '$commentAuthor.name',
-//           authorPic: '$commentAuthor.profilePicture',
-//         },
-//       },
-//     ]);
-
-//     res.status(200).json(comments);
-//   } catch (error) {
-//     // If an error occurs, log the error and return an internal server error response
-//     console.error(error.message);
-//     res.status(500).json({
-//       error: 'Internal server error',
-//     });
-//   }
-// }
-
 async function getCommentsByArticleId(req, res) {
   const { articleId } = req.params;
   try {
