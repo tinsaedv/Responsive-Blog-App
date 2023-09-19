@@ -276,28 +276,19 @@ async function getArticlesById(req, res) {
   }
 }
 
-// This is an asynchronous function named 'getArticlesById' that takes in a request and response object.
-async function getArticlesById(req, res) {
-  // Destructure 'articleId' from the request parameters.
-  const { articleId } = req.params;
+// This is an asynchronous function named 'getArticlesByUserId' that takes in a request and response object.
+async function getArticlesByUserId(req, res) {
+  // Destructure 'articleAuthorId' from the request parameters.
+  const { articleAuthorId } = req.params;
 
   // Start of try block to catch any errors.
   try {
-    // Find the article in the database by its ID.
-    const article = await ArticleModel.findById(articleId);
-
-    // Increment the views of the article by 1.
-    article.views++;
-
-    // Save the updated article back to the database.
-    await article.save();
-
     // Use the aggregate function to perform a complex query on the 'ArticleModel' collection.
-    const articleData = await ArticleModel.aggregate([
+    const articles = await ArticleModel.aggregate([
       {
-        // Match documents in the collection that have the same '_id' as 'articleId'.
+        // Match documents in the collection that have the same 'articleAuthorId' as 'articleAuthorId'.
         $match: {
-          _id: new mongoose.Types.ObjectId(articleId),
+          articleAuthorId: new mongoose.Types.ObjectId(articleAuthorId),
         },
       },
       {
@@ -306,50 +297,47 @@ async function getArticlesById(req, res) {
           from: 'users',
           localField: 'articleAuthorId',
           foreignField: '_id',
-          as: 'Author',
+          as: 'articleAuthor',
         },
       },
       {
         // Deconstruct an array field from the input documents to output a document for each element.
-        $unwind: '$Author',
+        $unwind: '$articleAuthor',
       },
       {
         // Passes along the documents with the requested fields to the next stage in the pipeline.
         $project: {
           _id: 1,
-          articleAuthorId: 1,
+          thumbnail: 1,
           title: 1,
           summary: 1,
-          thumbnail: 1,
-          body: 1,
           category: 1,
+          body: 1,
+          tags: 1,
           likes: 1,
           createdAt: 1,
-          likedBy: 1,
-          author: '$Author.name',
-          authorPic: '$Author.profilePicture',
-          authorBio: '$Author.bio',
-          authorProfession: '$Author.profession',
-          authorVerified: {
-            $arrayElemAt: ['$Author.stats.verified', 0],
+          articleAuthorId: 1,
+          author: '$articleAuthor.name',
+          authorPic: '$articleAuthor.profilePicture',
+          verified: {
+            $arrayElemAt: ['$articleAuthor.stats.verified', 0],
           },
         },
       },
     ]);
 
-    // If the article or the article data is not found, return a 404 error.
-    if (!article || !articleData) {
+    // If the article is not found, return a 404 error
+    if (!articles) {
       return res.status(404).json({
         error: 'Article not found',
       });
     }
 
-    // Send a response with a status of 200 and the article data in JSON format.
-    res.status(200).json(articleData);
+    // Return the article
+    res.status(200).json(articles);
   } catch (error) {
-    // If an error occurs, log the error message to the console.
+    // If an error occurs, log the error and return an internal server error response
     console.error(error.message);
-    // Send a response with a status of 500 and the error message in JSON format.
     res.status(500).json({
       error: 'Internal server error!',
     });
