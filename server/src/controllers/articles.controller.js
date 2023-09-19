@@ -15,6 +15,14 @@ async function postArticle(req, res) {
         error: 'All fields are required',
       });
     }
+    // Find the user by their ID
+    const user = await UserModel.findById(authorId);
+
+    if (!user) {
+      return res.status(404).json({
+        error: 'Author not found!',
+      });
+    }
 
     const { secureUrl, publicId } = await uploadThumbnail(thumbnail, authorId);
 
@@ -34,9 +42,6 @@ async function postArticle(req, res) {
       likes: 0,
       likedBy: [],
     });
-
-    // Find the user by their ID
-    const user = await UserModel.findById(authorId);
 
     user.stats[0].articlesCount++;
 
