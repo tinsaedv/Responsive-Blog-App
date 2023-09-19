@@ -1,5 +1,5 @@
 const express = require('express');
-
+const path = require('path');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const passport = require('passport');
@@ -80,6 +80,10 @@ app.use('/api/comments', CommentRouter);
 app.use('/api', UploadImageRouter);
 app.use('/auth', OauthRouter);
 
-app.get('/*');
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 
 module.exports = app;
