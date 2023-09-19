@@ -77,14 +77,20 @@ async function deleteComment(req, res) {
   }
 }
 
+// This function retrieves comments for a specific article by its ID
 async function getCommentsByArticleId(req, res) {
+  // Extract the 'articleId' parameter from the request
   const { articleId } = req.params;
+
   try {
+    // Use MongoDB's aggregation framework to retrieve the comments
     const comments = await CommentModel.aggregate([
       {
+        // Match documents where 'articleId' is the same as the provided 'articleId'
         $match: { articleId: new mongoose.Types.ObjectId(articleId) },
       },
       {
+        // Perform a left outer join to the 'articles' collection in the same database to filter in documents from the "joined" collection for processing
         $lookup: {
           from: 'articles',
           localField: 'articleId',
@@ -93,6 +99,7 @@ async function getCommentsByArticleId(req, res) {
         },
       },
       {
+        // Perform a left outer join to the 'users' collection in the same database to filter in documents from the "joined" collection for processing
         $lookup: {
           from: 'users',
           localField: 'commentAuthorId',
@@ -101,12 +108,15 @@ async function getCommentsByArticleId(req, res) {
         },
       },
       {
+        // Deconstruct an array field from the input documents to output a document for each element
         $unwind: '$article',
       },
       {
+        // Deconstruct an array field from the input documents to output a document for each element
         $unwind: '$author',
       },
       {
+        // Pass along the documents with the requested fields to the next stage in the pipeline
         $project: {
           _id: 1,
           text: 1,
@@ -119,15 +129,16 @@ async function getCommentsByArticleId(req, res) {
       },
     ]);
 
+    // Return the comments as a JSON response
     res.status(200).json(comments);
   } catch (error) {
-    console.error(error.message);
+    // If an error occurs, handle it
+    console.error(error.message); // Log the error message
     res.status(500).json({
       error: 'Internal server error',
-    });
+    }); // Return a 500 error response
   }
 }
-
 module.exports = {
   postComment,
   deleteComment,
