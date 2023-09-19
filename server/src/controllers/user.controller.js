@@ -3,9 +3,6 @@ const validator = require('validator');
 const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const cloudinary = require('cloudinary').v2;
-const mongoose = require('mongoose');
-const { uploadProfilePicture } = require('../services/imageUpload');
-const base64String = require('../Utils/InitialRegisterPic');
 
 require('dotenv').config();
 
@@ -77,11 +74,6 @@ async function registerUser(req, res) {
     name = name.charAt(0).toUpperCase() + name.slice(1);
 
     // Create a new user instance with the provided data
-
-    // const { secureUrl, publicId } = await uploadProfilePicture(
-    //   base64String,
-    //   userName?._id
-    // );
 
     user = new UserModel({
       profilePicture: '',
