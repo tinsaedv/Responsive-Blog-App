@@ -8,20 +8,25 @@ require('dotenv').config();
 
 // Function to create JWT tokens
 function createTokens(_id) {
+  // Get the JWT keys from the environment variables
   const jwt_keys = process.env.JWT_KEYS;
+  // Sign a new JWT token with the user's ID and the JWT keys, set to expire in 3 days
   return jwt.sign({ _id }, jwt_keys, { expiresIn: '3d' });
 }
 
 // Function to register a new user
 async function registerUser(req, res) {
+  // Destructure 'name', 'email', and 'password' from the request body
   let { name, email, password } = req.body;
   try {
+    // Find a user in the database with the provided email
     let user = await UserModel.findOne({
       email,
     });
 
     // Check if all required fields are provided
     if (!name || !email || !password) {
+      // If not, return a 400 error with a message
       return res.status(400).json({
         error: 'All fields are required!',
       });
@@ -29,16 +34,20 @@ async function registerUser(req, res) {
 
     // Check if a user with the provided email already exists
     if (user) {
+      // If so, return a 400 error with a message
       return res.status(400).json({
         error: 'User with the given email already exists',
       });
     }
 
+    // Convert the name and email to lowercase
     name.toLowerCase();
     email.toLowerCase();
 
+    // Find a user in the database with the provided name
     const userName = await UserModel.findOne({ name });
 
+    // If a user with the provided name exists, return a 403 error with a message
     if (userName) {
       return res.status(403).json({
         error: 'Username exists. try other!',
@@ -47,6 +56,7 @@ async function registerUser(req, res) {
 
     // Check if the username has at least 3 characters
     if (!validator.isLength(name, { min: 3 })) {
+      // If not, return a 400 error with a message
       return res.status(400).json({
         error: 'Username must contain at least 3 characters',
       });
@@ -54,6 +64,7 @@ async function registerUser(req, res) {
 
     // Check if the email is valid
     if (!validator.isEmail(email)) {
+      // If not, return a 400 error with a message
       return res.status(400).json({
         error: 'Invalid email',
       });
@@ -62,24 +73,26 @@ async function registerUser(req, res) {
     // Check if the password is strong
     const isStrongPassword = validator.isStrongPassword(password);
     if (!isStrongPassword) {
+      // If not, return a 400 error with a message
       return res.status(400).json({
         error: 'Password is not strong',
       });
     }
 
-    // Hash the password
+    // Generate a salt for hashing the password
     const salt = await bcrypt.genSalt(10);
+    // Hash the password with the generated salt
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Capitalize the first letter of the name
     name = name.charAt(0).toUpperCase() + name.slice(1);
 
     // Create a new user instance with the provided data
-
     user = new UserModel({
       profilePicture: '',
       profilePicturePublicId: '',
       name: name,
-      email: email,
+      email: email.toLowerCase(),
       bio: '',
       profession: '',
       password: hashedPassword,
@@ -95,8 +108,8 @@ async function registerUser(req, res) {
     // Initialize the user's stats
     user.stats = [{ followersCount: 0, followingCount: 0 }];
 
-    // Save the new user
-    const response = await user.save();
+    // Save the new user to the database
+    await user.save();
 
     // Create a JWT token for the user
     const token = createTokens(user._id);
@@ -118,14 +131,16 @@ async function registerUser(req, res) {
 
 // Function to authenticate a user and generate a token
 async function loginUser(req, res) {
+  // Destructure 'nameOrEmail' and 'password' from the request body
   let { nameOrEmail, password } = req.body;
 
   try {
-    // Find the user by their name or email
-
+    // Capitalize the first letter of 'nameOrEmail'
     nameOrEmail = nameOrEmail.charAt(0).toUpperCase() + nameOrEmail.slice(1);
 
+    // Find the user by their name or email
     const user = await UserModel.findOne({
+      // Use MongoDB's $or operator to find the user by either name or email
       $or: [{ name: nameOrEmail }, { email: nameOrEmail.toLowerCase() }],
     });
 
@@ -136,7 +151,7 @@ async function loginUser(req, res) {
       });
     }
 
-    // Compare the provided password with the hashed password
+    // Compare the provided password with the hashed password stored in the database
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     // If the password is incorrect, return a 400 error
@@ -146,7 +161,7 @@ async function loginUser(req, res) {
       });
     }
 
-    // Create a JWT token for the user
+    // Create a JWT token for the user using the 'createTokens' function
     const token = createTokens(user._id);
 
     // Return the response with the user's data and token
@@ -157,7 +172,9 @@ async function loginUser(req, res) {
       token,
     });
   } catch (error) {
+    // Log the error message to the console
     console.error(error.message);
+    // Return a 500 error response
     res.status(500).json({
       error: 'Internal server error',
     });
@@ -168,8 +185,11 @@ async function loginUser(req, res) {
 async function getUserById(req, res) {
   const { id } = req.params; // Extract the _id parameter from the request
   try {
+    // find the user with user Id and exclude password
     const user = await UserModel.findById(id, { password: 0 }).populate({
+      // go to likedArticles array path
       path: 'likedArticles',
+      // only include the specified properties
       select: '_id thumbnail title summary createdAt',
     });
 
@@ -207,95 +227,56 @@ async function getAllUsers(req, res) {
 
 // This function allows a user to follow another user
 async function follow(req, res) {
-  const { userId, followerId } = req.params; // Extract the userId and followerId parameters from the request
-  try {
-    const user = await UserModel.findById(userId); // Find the user to follow
+  // Extract the userId and followerId parameters from the request
+  const { userId, followerId } = req.params;
 
+  try {
+    // Find the user to follow
+    const user = await UserModel.findById(userId);
+
+    // If the user is trying to follow themselves, return a 403 error response
     if (userId === followerId) {
-      // If the user is trying to follow themselves, return a 403 error response
       return res.status(403).json({
         error: `You can't follow yourself.`,
       });
     }
 
+    // If no user is found, return a 404 error response
     if (!user) {
-      // If no user is found, return a 404 error response
       return res.status(404).json({
         error: 'User not found!',
       });
     }
 
-    const follower = await UserModel.findById(followerId); // Find the user who wants to follow
+    // Find the user who wants to follow
+    const follower = await UserModel.findById(followerId);
 
-    const followerExist = user.followers.includes(followerId); // Check if the follower is already in the user's followers array
+    // Check if the follower is already in the user's followers array
+    const followerExist = user.followers.includes(followerId);
 
+    // If the follower does not exist in the user's followers array
     if (!followerExist) {
+      // Increment the followers count of the user and the following count of the follower
       user.stats[0].followersCount++;
       follower.stats[0].followingCount++;
+      // Add the follower to the user's followers array
       user.followers.push(followerId);
     } else {
+      // If the follower exists in the user's followers array
+      // Decrement the followers count of the user and the following count of the follower
       user.stats[0].followersCount--;
       follower.stats[0].followingCount--;
+      // Remove the follower from the user's followers array
       user.followers = user.followers.filter((follower) => {
         return follower.toString() !== followerId;
       });
     }
 
-    await follower.save(); // Save the follower
-    const response = await user.save(); // Save the user
-    res.status(200).json(response); // Return the response as a JSON response
-  } catch (error) {
-    // If an error occurs, handle it
-    console.error(error.message); // Log the error message
-    res.status(500).json({
-      error: 'Internal server error',
-    }); // Return a 500 error response
-  }
-}
-
-async function updateProfile(req, res) {
-  let { userId, socials, name, bio, profession } = req.body;
-  try {
-    const user = await UserModel.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({
-        error: 'User not found',
-      });
-    }
-
-    name = name.charAt(0).toUpperCase() + name.slice(1);
-    bio = bio.charAt(0).toUpperCase() + bio.slice(1);
-
-    const userFound = await UserModel.findOne({ name });
-
-    if (userFound && userFound.name === name) {
-      return res.status(409).json({
-        error: "That's your current name",
-      });
-    }
-
-    if (userFound) {
-      return res.status(404).json({
-        error: 'User already exist',
-      });
-    }
-
-    name ? (user.name = name) : null;
-    bio ? (user.bio = bio) : null;
-    profession ? (user.profession = profession) : null;
-
-    // Add the link to the appropriate platform in the socials object
-    socials.forEach((social) => {
-      const { platform, link } = social;
-      if (link) {
-        user.socials[platform] = link;
-      }
-    });
-
-    user.markModified('socials');
-
+    // Save the follower
+    await follower.save();
+    // Save the user
     const response = await user.save();
+    // Return the response as a JSON response
     res.status(200).json(response);
   } catch (error) {
     // If an error occurs, handle it
@@ -306,23 +287,102 @@ async function updateProfile(req, res) {
   }
 }
 
-async function deleteAccount(req, res) {
-  const { userId } = req.params;
+// This function updates a user's profile
+async function updateProfile(req, res) {
+  // Destructure 'userId', 'socials', 'name', 'bio', and 'profession' from the request body
+  let { userId, socials, name, bio, profession } = req.body;
+
   try {
+    // Find the user by their ID
+    const user = await UserModel.findById(userId);
+
+    // If the user is not found, return a 404 error
+    if (!user) {
+      return res.status(404).json({
+        error: 'User not found',
+      });
+    }
+
+    // Capitalize the first letter of 'name' and 'bio'
+    if (name) {
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+    if (bio) {
+      bio = bio.charAt(0).toUpperCase() + bio.slice(1);
+    }
+
+    // Find a user by their name
+    const userFound = await UserModel.findOne({ name });
+
+    // If a user with the provided name exists and it's the same as the current user's name, return a 409 error
+    if (userFound && userFound.name === name) {
+      return res.status(409).json({
+        error: "That's your current name",
+      });
+    }
+
+    // If a user with the provided name exists, return a 404 error
+    if (userFound) {
+      return res.status(404).json({
+        error: 'User already exist',
+      });
+    }
+
+    // If 'name', 'bio', and 'profession' are provided, update the user's profile with these values
+    name ? (user.name = name) : null;
+    bio ? (user.bio = bio) : null;
+    profession ? (user.profession = profession) : null;
+
+    // For each social platform provided, add the link to the appropriate platform in the user's 'socials' object
+    socials.forEach((social) => {
+      const { platform, link } = social;
+      if (link) {
+        user.socials[platform] = link;
+      }
+    });
+
+    // Indicate that the 'socials' field has been modified
+    user.markModified('socials');
+
+    // Save the user
+    const response = await user.save();
+    // Return the response as a JSON response
+    res.status(200).json(response);
+  } catch (error) {
+    // If an error occurs, handle it
+    console.error(error.message); // Log the error message
+    res.status(500).json({
+      error: 'Internal server error',
+    }); // Return a 500 error response
+  }
+}
+
+// This function deletes a user's account
+async function deleteAccount(req, res) {
+  // Extract the 'userId' parameter from the request
+  const { userId } = req.params;
+
+  try {
+    // Find the user by their ID
     const userToDelete = await UserModel.findById(userId);
 
+    // If the user is not found, return a 404 error
     if (!userToDelete) {
       return res.status(404).json({
         error: 'User not found!',
       });
     }
 
+    // Get the user's profile picture public ID
     const profilePicturePublicId = userToDelete?.profilePicturePublicId;
 
+    // Delete the user's profile picture from Cloudinary
     await cloudinary.uploader.destroy(profilePicturePublicId);
 
+    // Delete the user from the database
     await UserModel.findByIdAndDelete(userId);
 
+    // Return a success response
     res.status(200).json({
       success: true,
       message: 'Account deleted Permanently!',
