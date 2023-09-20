@@ -14,13 +14,10 @@ import ProfileRecentArticles from '../../components/Profile/ProfileRecentArticle
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [editIsClicked, setEditIsClicked] = useState(false);
-  const { userProfile, profession, getProfileInfoValue } = useProfileStore(
-    (state) => ({
-      userProfile: state.userProfile,
-      profession: state.profession,
-      getProfileInfoValue: state.getProfileInfoValue,
-    })
-  );
+  const { userProfile, getProfileInfoValue } = useProfileStore((state) => ({
+    userProfile: state.userProfile,
+    getProfileInfoValue: state.getProfileInfoValue,
+  }));
 
   const { userArticles, getUserArticlesById } = useArticleStore((state) => ({
     userArticles: state.userArticles,
@@ -30,9 +27,6 @@ const Profile = () => {
   useEffect(() => {
     getUserArticlesById(userProfile?._id);
   }, [userProfile, getUserArticlesById]);
-
-  console.log('userProfile', userProfile);
-  console.log('profession', profession);
 
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
