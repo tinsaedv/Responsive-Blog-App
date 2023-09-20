@@ -100,7 +100,7 @@ app.get('/failure', (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../public/index.html'));
+  return res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 //setup server
