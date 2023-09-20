@@ -1,8 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useArticleStore } from '../../App/useArticleStore';
 
 const LoadMore = () => {
-  const { setCurrentPage, currentPage, articles, getArticles, endOfArticle } =
+  const { setCurrentPage, currentPage, getArticles, endOfArticle } =
     useArticleStore((state) => ({
       setCurrentPage: state.setCurrentPage,
       articles: state.articles,
@@ -13,10 +13,7 @@ const LoadMore = () => {
 
   useEffect(() => {
     getArticles();
-  }, [currentPage]);
-
-  console.log('currentPage', currentPage);
-  console.log('endOfArticle', endOfArticle);
+  }, [currentPage, getArticles]);
 
   return (
     <div>
