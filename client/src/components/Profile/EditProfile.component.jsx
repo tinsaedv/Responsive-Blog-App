@@ -2,10 +2,9 @@ import { useProfileStore } from '../../App/useUserProfileStore';
 
 const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
   const {
-    socialInfos,
     setSocialInfos,
     updateUserSocials,
-    updatedUserSocials,
+
     userProfile,
     setName,
     setBio,
@@ -19,10 +18,9 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     linkedInValue,
     professionValue,
   } = useProfileStore((state) => ({
-    socialInfos: state.socialInfos,
     setSocialInfos: state.setSocialInfos,
     updateUserSocials: state.updateUserSocials,
-    updatedUserSocials: state.updatedUserSocials,
+
     userProfile: state.userProfile,
     setName: state.setName,
     setBio: state.setBio,
@@ -47,9 +45,6 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     const { name, value } = e.target;
     setSocialInfos(name, value);
   }
-  console.log('socialInfos', socialInfos);
-  console.log('updatedUserSocials', updatedUserSocials);
-  console.log('userProfile', userProfile);
 
   return (
     <form

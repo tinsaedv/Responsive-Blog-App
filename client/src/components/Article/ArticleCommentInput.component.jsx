@@ -12,8 +12,6 @@ const ArticleCommentInput = memo(({ articleId }) => {
     setComment(e.target.value);
   }
 
-  console.log('comment', comment);
-
   function handleOnSubmit(e) {
     e.preventDefault();
     postComment(articleId);

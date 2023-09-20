@@ -21,10 +21,6 @@ const ArticleComment = memo(({ articleId }) => {
     postComment,
     deleteCommentById,
     getComment,
-    updateComment,
-    setUpdateComment,
-    updateCommentById,
-    commentInputOpen,
     setCommentInputOpen,
     setEditingCommentId,
     editingCommentId,
@@ -34,10 +30,6 @@ const ArticleComment = memo(({ articleId }) => {
     postComment: state.postComment,
     deleteCommentById: state.deleteCommentById,
     getComment: state.getComment,
-    updateComment: state.updateComment,
-    setUpdateComment: state.setUpdateComment,
-    updateCommentById: state.updateCommentById,
-    commentInputOpen: state.commentInputOpen,
     setCommentInputOpen: state.setCommentInputOpen,
     setEditingCommentId: state.setEditingCommentId,
     editingCommentId: state.editingCommentId,
@@ -47,12 +39,9 @@ const ArticleComment = memo(({ articleId }) => {
     article: state.article,
   }));
 
-  console.log('responseComment', responseComment);
-  console.log('editingCommentId', editingCommentId);
-
   useEffect(() => {
     articleId && getCommentsByArticleId(articleId);
-  }, [articleId, postComment]);
+  }, [articleId, postComment, getCommentsByArticleId]);
 
   return (
     <div className='mx-[1.6rem] mt-[3.13rem] '>
