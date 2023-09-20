@@ -17,7 +17,6 @@ const RecentArticles = () => {
       .slice(0, 5);
   }
 
-  console.log('slicedArticle', slicedArticle);
   return (
     <div className='mt-[3.69rem] min-w-[23rem]'>
       <div className='mx-[1.5rem]  px-[1.06rem]  py-[1.13rem] shadow-xl rounded-lg'>
