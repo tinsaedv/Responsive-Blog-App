@@ -13,7 +13,6 @@ function App() {
     getUserProfile();
   }, [getUserProfile]);
 
-  // console.log('userProfileApp', userProfile);
   return (
     <>
       <Routers />
