@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useArticleStore } from '../../App/useArticleStore';
-import { useProfileStore } from '../../App/useUserProfileStore';
 import { useUserStore } from '../../App/useAuthStore';
 
 const AboutAuthor = () => {
-  const { article, getUserArticles } = useArticleStore((state) => ({
+  const { article } = useArticleStore((state) => ({
     article: state.article,
-    getUserArticles: state.getUserArticles,
   }));
 
   const { user } = useUserStore((state) => ({
@@ -14,10 +12,6 @@ const AboutAuthor = () => {
   }));
 
   const navigate = useNavigate();
-
-  const { setOtherUserProfile } = useProfileStore((state) => ({
-    setOtherUserProfile: state.setOtherUserProfile,
-  }));
 
   return (
     <section className='bg-gray-100 w-[80%] rounded-2xl p-10 mt-10 place-self-center'>
@@ -36,8 +30,6 @@ const AboutAuthor = () => {
               top: 0,
               behavior: 'smooth',
             });
-            setOtherUserProfile(article?.articleAuthorId);
-            getUserArticles(article?.articleAuthorId);
           }}
           className='flex sm:flex-row text-center cursor-pointer sm:text-start flex-col items-center gap-5  '
         >
