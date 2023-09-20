@@ -7,4 +7,13 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    outDir: '..//server/dist',
+    assetsInlineLimit: 10000,
+  },
+  resolve: {
+    alias: {
+      assets: './/src/assets',
+    },
+  },
 });
