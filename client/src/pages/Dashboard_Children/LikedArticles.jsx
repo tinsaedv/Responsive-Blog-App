@@ -14,7 +14,6 @@ const LikedArticles = () => {
     getArticleById: state.getArticleById,
   }));
 
-  console.log('userProfile', userProfile?.likedArticles);
   let slicedArticles = userProfile?.likedArticles;
 
   slicedArticles = userProfile?.likedArticles.map((article) => {
