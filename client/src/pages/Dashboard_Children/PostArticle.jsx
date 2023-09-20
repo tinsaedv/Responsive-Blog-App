@@ -7,8 +7,7 @@ import Footer from '../../components/Footer';
 import PostArticleQuill from '../../components/Dashboard/PostArticleQuill.component';
 
 const PostArticle = () => {
-  const { postArticle, summary } = useArticleStore((state) => ({
-    summary: state.summary,
+  const { postArticle } = useArticleStore((state) => ({
     postArticle: state.postArticle,
   }));
 
@@ -16,7 +15,6 @@ const PostArticle = () => {
     postArticle();
   }
 
-  console.log('summary', summary);
   return (
     <main className=' flex flex-col justify-center items-center lg:ml-[5rem]  bg-gray-100 p-3 rounded-md'>
       {/* post article form component */}
