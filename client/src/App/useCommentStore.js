@@ -7,8 +7,8 @@ import {
   updateRequest,
 } from '../utils/request';
 import { useUserStore } from './useAuthStore';
-import { useProfilePictureStore, useProfileStore } from './useUserProfileStore';
 import { toast } from 'react-toastify';
+import { useProfileStore } from './useUserProfileStore';
 const useCommentStore = create((set, get) => ({
   responseComment: null,
   comment: '',
@@ -32,7 +32,6 @@ const useCommentStore = create((set, get) => ({
     const state = get();
 
     const commentFound = state.responseComment?.find((res) => res?._id === id);
-    console.log('commentFound', commentFound?.text);
 
     return commentFound ? set({ updateComment: commentFound?.text }) : null;
   },
@@ -47,7 +46,7 @@ const useCommentStore = create((set, get) => ({
       });
 
       if (response.error) {
-        return console.log(response.message);
+        return toast.error(response.message);
       }
 
       set((prevState) => ({
@@ -56,8 +55,8 @@ const useCommentStore = create((set, get) => ({
           ...prevState.responseComment,
           {
             ...response,
-            authorPic: useProfileStore.getState().userProfile.profilePicture,
-            author: useProfileStore.getState().userProfile.name,
+            authorPic: useProfileStore.getState().userProfile?.profilePicture,
+            author: useProfileStore.getState().userProfile?.name,
           },
         ],
       }));
