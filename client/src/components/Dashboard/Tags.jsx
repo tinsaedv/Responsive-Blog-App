@@ -1,15 +1,12 @@
 import { useArticleStore } from '../../App/useArticleStore';
 import { TagsInput } from 'react-tag-input-component';
 const Tags = () => {
-  const { tags, setTags, removeTags } = useArticleStore((state) => ({
+  const { tags, setTags } = useArticleStore((state) => ({
     tags: state.tags,
     setTags: state.setTags,
-    removeTags: state.removeTags,
   }));
 
   const tagsChecked = Array.isArray(tags) ? tags : [];
-
-  console.log('tags', tagsChecked);
 
   return (
     <div className='lg:min-w-[80%] my-5'>
