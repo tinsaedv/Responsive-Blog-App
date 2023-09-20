@@ -54,8 +54,6 @@ const Article = () => {
     getArticles();
   }, [getArticles]);
 
-  userProfile && console.log('userProfile', userProfile);
-
   function handleLike() {
     if (!user) {
       window.scrollTo({
@@ -70,7 +68,6 @@ const Article = () => {
 
   const alreadyLiked = article?.likedBy?.includes(user?._id);
 
-  console.log('alreadyLiked', alreadyLiked);
   return (
     <main className='mx-[1.5rem] relative top-0   mb-[6.25rem] '>
       {/* Bread crumbs */}
