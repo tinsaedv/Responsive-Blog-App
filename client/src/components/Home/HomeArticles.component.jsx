@@ -42,8 +42,6 @@ const Articles = () => {
     return article;
   });
 
-  console.log('articles', articles);
-
   return (
     <section className='grid place-items-center'>
       <div className='grid mx-[1rem] gap-7  lg:max-w-full lg:min-w-[60rem]   grid-cols-1 sm:grid-cols-2  lg:grid-cols-3  xl:mx-10 place-items-center'>
