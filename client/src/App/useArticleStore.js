@@ -53,12 +53,6 @@ const useArticleStore = create((set, get) => ({
       (article) => article._id === id
     );
 
-    articleFound && console.log('articleFound');
-
-    console.log('articleFound', articleFound?.title);
-    console.log('articleFound', articleFound?.body);
-    console.log('tags in store', articleFound?.tags);
-
     return articleFound
       ? set({
           updateBody: articleFound?.body,
@@ -145,8 +139,6 @@ const useArticleStore = create((set, get) => ({
         tags: state.updateTags,
       });
 
-      console.log('response', response);
-
       if (response.error) {
         toast.error(`${response.message}`);
         return set({ articleError: response });
@@ -206,15 +198,6 @@ const useArticleStore = create((set, get) => ({
         return;
       }
 
-      console.log('getArticles called');
-
-      console.log('response', response);
-
-      // set((prevState) => ({
-      //   ...prevState,
-      //   articles: [...prevState.articles, ...response],
-      // }));
-
       set({ articles: response });
     } catch (error) {
       console.error(error.message);
@@ -246,7 +229,7 @@ const useArticleStore = create((set, get) => ({
     try {
       set({ userArticleLoading: true });
       const response = await getRequest(`${BASE_URL}/articles/get/${id}`);
-      console.log('response', response);
+
       set({ userArticleLoading: false });
       if (response.error) {
         return toast.error(`${response.message}`);
@@ -284,7 +267,7 @@ const useArticleStore = create((set, get) => ({
       });
 
       if (response.error) {
-        return console.log('There was error liking the article');
+        return toast.error('There was error liking the article');
       }
 
       set({ article: response });
