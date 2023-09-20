@@ -111,8 +111,6 @@ const useProfileStore = create((set, get) => ({
         return;
       }
 
-      console.log('response');
-
       const updatedSocialLinks = { ...state.userProfile.socials };
 
       // loop over socialInfos and if  info.link value is defined, then updated the links in updatedSocialLinks
@@ -169,7 +167,6 @@ const useProfileStore = create((set, get) => ({
 
         set({ userProfileLoading: false });
 
-        console.log('response', response);
         if (response.error) {
           return set({ userProfileError: response });
         }
@@ -189,7 +186,7 @@ const useProfileStore = create((set, get) => ({
       );
 
       if (response.error) {
-        return console.log(response.message);
+        return toast.error(response.message);
       }
 
       set({ otherUserProfile: response });
