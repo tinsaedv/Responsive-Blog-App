@@ -185,22 +185,24 @@ async function loginUser(req, res) {
 async function getUserById(req, res) {
   const { id } = req.params; // Extract the _id parameter from the request
   try {
-    // find the user with user Id and exclude password
-    const user = await UserModel.findById(id, { password: 0 }).populate({
-      // go to likedArticles array path
-      path: 'likedArticles',
-      // only include the specified properties
-      select: '_id thumbnail title summary createdAt',
-    });
-
-    if (!user) {
-      // If no user is found, return a 404 error response
-      return res.status(404).json({
-        error: 'User not found',
+    if (id) {
+      // find the user with user Id and exclude password
+      const user = await UserModel.findById(id, { password: 0 }).populate({
+        // go to likedArticles array path
+        path: 'likedArticles',
+        // only include the specified properties
+        select: '_id thumbnail title summary createdAt',
       });
-    }
 
-    res.status(200).json(user); // Return the user as a JSON response
+      if (!user) {
+        // If no user is found, return a 404 error response
+        return res.status(404).json({
+          error: 'User not found',
+        });
+      }
+
+      res.status(200).json(user); // Return the user as a JSON response
+    }
   } catch (error) {
     // If an error occurs, handle it
     console.error(error.message); // Log the error message
