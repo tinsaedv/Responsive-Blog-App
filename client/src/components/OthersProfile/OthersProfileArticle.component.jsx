@@ -20,6 +20,15 @@ const OthersProfileArticle = () => {
     getUserArticlesById(id);
   }, [id, getUserArticlesById]);
 
+  let slicedArticles = userArticles;
+
+  slicedArticles = userArticles.map((article) => {
+    if (article.summary.length > 90) {
+      return { ...article, summary: article.summary.substring(0, 65) + '...' };
+    }
+    return article;
+  });
+
   return (
     <main>
       <div className='mt-[3.69rem] min-w-[23rem]'>
@@ -29,8 +38,8 @@ const OthersProfileArticle = () => {
               Articles written by this Author
             </h1>
             <div className='grid mx-[1rem] gap-7  lg:max-w-full lg:min-w-[60rem]   grid-cols-1 sm:grid-cols-2  lg:grid-cols-3  xl:mx-10 place-items-center'>
-              {userArticles &&
-                userArticles?.map((article) => (
+              {slicedArticles &&
+                slicedArticles?.map((article) => (
                   <div
                     key={article?._id}
                     className='max-w-xs min-w-[18rem] sm:min-w-[19rem] overflow-hidden  rounded-[0.75rem] shadow-md'
