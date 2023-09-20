@@ -29,8 +29,6 @@ const OthersProfile = () => {
     getOtherUserProfile(id);
   }, [getOtherUserProfile, id]);
 
-  console.log('otherUserProfile rendered');
-
   const socialsUnavailable =
     otherUserProfile?.socials?.facebook !== '' ||
     otherUserProfile?.socials?.instagram !== '' ||
@@ -43,7 +41,7 @@ const OthersProfile = () => {
       <div className='flex sm:w-[70%] max-w-[80%] p-2 break-words   rounded-2xl  backdrop-blur-sm bg-gradient-to-tr from-blue-100 to-red-100 shadow-xl   flex-col items-center justify-center'>
         {/* Author profile picture */}
         {otherUserProfile && otherUserProfile.profilePicture !== '' ? (
-          <div className='w-[160px] h-[160px] rounded-full overflow-hidden'>
+          <div className='w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] rounded-full overflow-hidden'>
             {' '}
             <img
               className='w-full h-full object-cover'
