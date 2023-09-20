@@ -44,7 +44,6 @@ const UpdateArticleQuill = () => {
     'background',
   ];
 
-  console.log('updateBody', updateBody);
   return (
     <main className={`min-w-[80%] grid place-items-center  `}>
       <div
