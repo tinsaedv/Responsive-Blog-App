@@ -14,7 +14,7 @@ const InputSearch = () => {
   }
 
   return (
-    <div className='relative mx-[20%] h-[3rem] sm:h-[3.5rem] mb-[1rem] rounded-md shadow-md overflow-hidden'>
+    <div className='relative h-[3rem] sm:h-[3.5rem] mb-[1rem] rounded-md shadow-md overflow-hidden'>
       <ImSearch className='absolute sm:top-[1.4rem] top-[1rem] left-[1.06rem] text-[#959EAD]' />
       <input
         onChange={handleOnChange}
