@@ -14,7 +14,8 @@ const Home = () => {
     if (searchQuery === '') {
       getArticles();
     }
-  }, [searchQuery]);
+  }, [searchQuery, getArticles]);
+
   return (
     <main className='relative '>
       <section className='flex items-center justify-center gap-4 mb-[2.5rem] '>
