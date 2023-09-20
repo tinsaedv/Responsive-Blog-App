@@ -19,7 +19,6 @@ const AllUserArticles = () => {
     getUserArticlesById,
     deleteArticlesById,
     getArticleContent,
-    updateTitle,
     userArticleLoading,
     editingArticleId,
     setEditingArticleId,
@@ -29,7 +28,6 @@ const AllUserArticles = () => {
     getUserArticlesById: state.getUserArticlesById,
     deleteArticlesById: state.deleteArticlesById,
     getArticleContent: state.getArticleContent,
-    updateTitle: state.updateTitle,
     userArticleLoading: state.userArticleLoading,
     editingArticleId: state.editingArticleId,
     setEditingArticleId: state.setEditingArticleId,
@@ -38,12 +36,6 @@ const AllUserArticles = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-
-  console.log('menuOpen', menuOpen);
-  console.log('deleteOpen', deleteOpen);
-
-  console.log('userProfile', userProfile);
-  console.log('userArticles', userArticles);
 
   useEffect(() => {
     if (userProfile && userProfile._id) {
@@ -60,7 +52,6 @@ const AllUserArticles = () => {
     return article;
   });
 
-  console.log('updateTitle', updateTitle);
   return (
     <div>
       {/* if  userArticleLoading is true open loading animation or display content*/}
