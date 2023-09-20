@@ -2,16 +2,14 @@ import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../App/useAuthStore';
 
 const Login = () => {
-  const { loginUser, loginLoading, loginInfo, setLoginInfo, loginError } =
-    useAuthStore((state) => ({
+  const { loginUser, loginLoading, setLoginInfo, loginError } = useAuthStore(
+    (state) => ({
       loginUser: state.loginUser,
-      loginInfo: state.loginInfo,
       setLoginInfo: state.setLoginInfo,
       loginLoading: state.loginLoading,
       loginError: state.loginError,
-    }));
-
-  console.log(loginInfo);
+    })
+  );
 
   function handleInputChange(e) {
     e.preventDefault();
@@ -65,7 +63,7 @@ const Login = () => {
       )}
       <div className='self-start mb-[10rem]'>
         <p className='text-[#5A7184] mr-[0.5rem] font-openSans font-semibold text-[0.875rem]'>
-          You don't have an account?{' '}
+          You don&apos;t have an account?{' '}
           <Link
             className='text-[0.875rem] font-openSans font-bold text-[#1565D8]'
             to={'/register'}
