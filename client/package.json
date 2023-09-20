@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build --watch",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "flowbite-react": "^0.5.0",
     "moment": "^2.29.4",
     "postcss-nested": "^6.0.1",
