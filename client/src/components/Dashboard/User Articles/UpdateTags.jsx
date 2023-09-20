@@ -7,7 +7,6 @@ const UpdateTags = () => {
   }));
   const tags = Array.isArray(updateTags) ? updateTags : [];
 
-  console.log('tags from update tags comp', tags);
   return (
     <div className='lg:min-w-[80%] my-5'>
       <TagsInput
