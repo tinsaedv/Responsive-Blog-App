@@ -2,21 +2,13 @@ import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../App/useAuthStore';
 
 const Register = () => {
-  const {
-    registerUser,
-    registerInfo,
-    setRegisterInfo,
-    registerLoading,
-    registerError,
-  } = useAuthStore((state) => ({
-    registerInfo: state.registerInfo,
-    registerUser: state.registerUser,
-    registerLoading: state.registerLoading,
-    registerError: state.registerError,
-    setRegisterInfo: state.setRegisterInfo,
-  }));
-
-  console.log('registerInfo', registerInfo);
+  const { registerUser, setRegisterInfo, registerLoading, registerError } =
+    useAuthStore((state) => ({
+      registerUser: state.registerUser,
+      registerLoading: state.registerLoading,
+      registerError: state.registerError,
+      setRegisterInfo: state.setRegisterInfo,
+    }));
 
   function handleInputChange(e) {
     const { name, value } = e.target;
