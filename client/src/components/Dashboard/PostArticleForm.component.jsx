@@ -1,16 +1,12 @@
 import { useArticleStore } from '../../App/useArticleStore';
 
 const PostArticleForm = () => {
-  const { setTitle, setSummary, setCategory, updateTitle } = useArticleStore(
-    (state) => ({
-      setTitle: state.setTitle,
-      setCategory: state.setCategory,
-      setSummary: state.setSummary,
-      updateTitle: state.updateTitle,
-    })
-  );
+  const { setTitle, setSummary, setCategory } = useArticleStore((state) => ({
+    setTitle: state.setTitle,
+    setCategory: state.setCategory,
+    setSummary: state.setSummary,
+  }));
 
-  console.log('updateTitle', updateTitle);
   return (
     <form className='flex min-w-[80%] justify-center flex-col mx-[10rem] mb-[2rem] gap-3'>
       <label>Title:</label>
