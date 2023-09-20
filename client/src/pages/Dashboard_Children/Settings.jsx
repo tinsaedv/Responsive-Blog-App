@@ -14,9 +14,6 @@ const Settings = () => {
     deleteAccount: state.deleteAccount,
   }));
 
-  const state = useAuthStore((state) => state);
-  console.log(state);
-  console.log(typeof deleteAccount);
   return (
     <main className=' flex flex-col justify-center items-center lg:ml-[5rem] relative bg-gray-100 p-3 rounded-md'>
       <div className='flex gap-5 font-medium items-center'>
