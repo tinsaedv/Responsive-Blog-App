@@ -46,7 +46,6 @@ const PostArticleQuill = () => {
     'size',
   ];
 
-  console.log('body', body);
   return (
     <main className={`min-w-[70%] grid place-items-center  `}>
       <div
