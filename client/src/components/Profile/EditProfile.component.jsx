@@ -1,4 +1,5 @@
 import { useProfileStore } from '../../App/useUserProfileStore';
+import PropTypes from 'prop-types';
 
 const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
   const {
@@ -17,7 +18,9 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     githubValue,
     linkedInValue,
     professionValue,
+    socialInfos,
   } = useProfileStore((state) => ({
+    socialInfos: state.socialInfos,
     setSocialInfos: state.setSocialInfos,
     updateUserSocials: state.updateUserSocials,
 
@@ -46,6 +49,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     setSocialInfos(name, value);
   }
 
+  console.log('socialInfos', socialInfos);
   return (
     <form
       className={`${
@@ -157,6 +161,11 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       </div>
     </form>
   );
+};
+
+EditProfile.propTypes = {
+  editIsClicked: PropTypes.bool.isRequired,
+  setEditIsClicked: PropTypes.func.isRequired,
 };
 
 export default EditProfile;
