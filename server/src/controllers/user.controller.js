@@ -14,6 +14,33 @@ function createTokens(_id) {
   return jwt.sign({ _id }, jwt_keys, { expiresIn: '3d' });
 }
 
+function verifyToken(req, res, next) {
+  // Get the token from the request headers
+  const token = req.headers['authorization'];
+
+  // If no token is provided, return a 401 (unauthorized) status
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  // Get the JWT keys from the environment variables
+  const jwt_keys = process.env.JWT_KEYS;
+
+  // Verify the token
+  jwt.verify(token, jwt_keys, (err, decoded) => {
+    // If an error occurs during verification, return a 500 (server error) status
+    if (err) {
+      return res.status(500).json({ error: 'Failed to authenticate token' });
+    }
+
+    // If the token is verified successfully, set the decoded object to req.user
+    req.user = decoded;
+
+    // Call the next middleware or controller
+    next();
+  });
+}
+
 // Function to register a new user
 async function registerUser(req, res) {
   // Destructure 'name', 'email', and 'password' from the request body
@@ -293,7 +320,7 @@ async function follow(req, res) {
 async function updateProfile(req, res) {
   // Destructure 'userId', 'socials', 'name', 'bio', and 'profession' from the request body
   let { userId, socials, name, bio, profession } = req.body;
-
+  console.log(req.body);
   try {
     // Find the user by their ID
     const user = await UserModel.findById(userId);
@@ -407,4 +434,5 @@ module.exports = {
   follow,
   updateProfile,
   deleteAccount,
+  verifyToken,
 };
