@@ -130,10 +130,16 @@ const useAuthStore = create((set, get) => ({
 
   // Function to delete a user account
   deleteAccount: async (userId) => {
+    // Get the user object from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Get the token from the user object
+    const token = user.token;
     try {
       // Send a DELETE request to delete the user account
       const response = await deleteRequest(
-        `${BASE_URL}/users/delete/${userId}`
+        `${BASE_URL}/users/delete/${userId}`,
+        token
       );
 
       // If there's an error in the response, display an error notification
