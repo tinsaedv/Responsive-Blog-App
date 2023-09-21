@@ -414,8 +414,14 @@ const useArticleStore = create((set, get) => ({
         return toast.error('There was error liking the article');
       }
 
-      // Setting the article state with the liked article
-      set({ article: response });
+      // Spreading article state and setting the views and likedBy property with the value from response
+      set({
+        article: {
+          ...get().article,
+          likes: response.likes,
+          likedBy: response.likedBy,
+        },
+      });
     } catch (error) {
       // Logging any error
       console.error(error.message);
