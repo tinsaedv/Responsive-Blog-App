@@ -1,10 +1,11 @@
 const BASE_URL = 'http://localhost:4000/api';
 
-async function postRequest(url, userData) {
+async function postRequest(url, userData, token) {
   try {
     const response = await fetch(url, {
       method: 'post',
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
@@ -28,9 +29,12 @@ async function postRequest(url, userData) {
   }
 }
 
-async function getRequest(url) {
+async function getRequest(url, token) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'get',
+      Authorization: `Bearer ${token}`,
+    });
     const data = await response.json();
 
     if (!response.ok) {
@@ -73,10 +77,11 @@ async function updateRequest(url, userData) {
   }
 }
 
-async function deleteRequest(url) {
+async function deleteRequest(url, token) {
   try {
     const response = await fetch(url, {
       method: 'delete',
+      Authorization: `Bearer ${token}`,
     });
 
     const data = await response.json();
