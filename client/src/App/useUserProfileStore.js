@@ -105,16 +105,29 @@ const useProfileStore = create((set, get) => ({
 
   // Function to update user socials
   updateUserSocials: async (userId) => {
+    // Get the user object from local storage
+    const user = JSON.parse(localStorage.getItem('User'));
+
+    // Get the token from the user object
+    const token = user.token;
+    console.log('token', token);
     try {
+      const updatedSocials = get().socialInfos.filter(
+        (social) => social.link !== ''
+      );
       const state = get(); // Get current state
-      const response = await postRequest(`${BASE_URL}/users/updateProfile`, {
-        // Send POST request to update profile
-        userId: userId,
-        socials: state.socialInfos,
-        name: state.name,
-        bio: state.bio,
-        profession: state.profession,
-      });
+      const response = await postRequest(
+        `${BASE_URL}/users/updateProfile`,
+        {
+          // Send POST request to update profile
+          userId: userId,
+          socials: updatedSocials,
+          name: state.name,
+          bio: state.bio,
+          profession: state.profession,
+        },
+        token
+      );
 
       if (response.error) {
         toast.error(`${response.message}`); // Show error toast if there's an error
@@ -173,11 +186,17 @@ const useProfileStore = create((set, get) => ({
 
   // Function to follow author
   followAuthor: async (userId) => {
+    // Get the user object from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Get the token from the user object
+    const token = user.token;
     try {
       const response = await getRequest(
         `${BASE_URL}/users/follow/${userId}/${
           useUserStore.getState().user?._id
-        }`
+        }`,
+        token
       ); // Send GET request to follow author
 
       if (response.error) {
