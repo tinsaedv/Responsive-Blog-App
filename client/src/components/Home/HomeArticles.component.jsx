@@ -32,7 +32,7 @@ const Articles = () => {
   let slicedArticles = articles;
 
   if (articles.length > 9) {
-    slicedArticles = articles.slice(0, 9);
+    slicedArticles = articles.slice(0, 9).sort((a, b) => b.views - a.views);
   }
 
   slicedArticles = slicedArticles.map((article) => {
