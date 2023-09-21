@@ -178,7 +178,7 @@ const useArticleStore = create((set, get) => ({
       set({ articleError: null, articleLoading: true });
 
       // Displaying a toast notification for posting article
-      toast.info('Posting Article...', { autoClose: 2000 });
+      toast.info('Posting Article...');
 
       // Making a post request to post an article
       const response = await postRequest(`${BASE_URL}/articles/post`, {
@@ -196,8 +196,12 @@ const useArticleStore = create((set, get) => ({
 
       // If there is an error, display a toast notification and set the error state
       if (response.error) {
-        toast.error(`${response.message}`);
-        return set({ articleError: response });
+        if (response.message === 'getaddrinfo ENOTFOUND api.cloudinary.com') {
+          toast.error(`${'Please check your internet connection'}`, {
+            autoClose: 4000,
+          });
+          return set({ articleError: response });
+        }
       }
 
       // If there is no error, display a success toast notification
