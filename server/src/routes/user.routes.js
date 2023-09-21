@@ -7,6 +7,7 @@ const {
   follow,
   updateProfile,
   deleteAccount,
+  verifyToken,
 } = require('../controllers/user.controller');
 
 const UserRouter = express.Router();
@@ -15,8 +16,8 @@ UserRouter.post('/register', registerUser)
   .post('/login', loginUser)
   .get('/:id', getUserById)
   .get('/', getAllUsers)
-  .get('/follow/:userId/:followerId', follow)
+  .get('/follow/:userId/:followerId', verifyToken, follow)
   .post('/updateProfile', updateProfile)
-  .delete('/delete/:userId', deleteAccount);
+  .delete('/delete/:userId', verifyToken, deleteAccount);
 
 module.exports = UserRouter;
