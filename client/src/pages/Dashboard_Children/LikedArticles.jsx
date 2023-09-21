@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useProfileStore } from '../../App/useUserProfileStore';
 import moment from 'moment';
 import { useArticleStore } from '../../App/useArticleStore';
+import Footer from '../../components/Footer';
 
 const LikedArticles = () => {
   const { userProfile } = useProfileStore((state) => ({
@@ -79,6 +80,7 @@ const LikedArticles = () => {
           )}
         </div>
       </div>
+      <Footer />
     </main>
   );
 };
