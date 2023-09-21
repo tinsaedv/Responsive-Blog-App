@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <main className='relative '>
       <section className='flex items-center justify-center gap-4 mb-[2.5rem] '>
-        <div className=' grid grid-cols-1 lg:w-[33.6875rem] lg:mx-[9rem] place-items-center'>
+        <div className=' grid grid-cols-1 lg:w-[25.6875rem] lg:mx-[9rem] place-items-center'>
           <h1 className='sm:w-[33.6875rem] sm:text-[3rem] lg:text-[3.5rem] lg:leading-[4.25rem] sm:leading-[3.75rem] min-w-[17rem] font-Roboto  text-[1.9375rem] leading-[2.5rem] font-bold text-center mx-[1.5rem] sm:mx-[7.12rem] mt-[6.5rem] mb-[1rem]'>
             Read the most interesting articles
           </h1>
@@ -58,12 +58,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className='hidden lg:block'>
-          <img
-            className='lg:h-[30.8125rem] lg:min-w-[30.75rem]'
-            src={frontPic}
-            alt=''
-          />
+        <div className='hidden lg:block lg:h-[30.8125rem] lg:min-w-[30.75rem]'>
+          <img className='w-full h-full object-cover' src={frontPic} alt='' />
         </div>
       </section>
       <Articles />
