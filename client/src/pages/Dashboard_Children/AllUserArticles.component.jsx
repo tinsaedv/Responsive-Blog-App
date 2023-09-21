@@ -8,6 +8,7 @@ import { BiSolidPencil } from 'react-icons/bi';
 import { BsTrashFill } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import DeleteArticleModal from '../../components/Dashboard/AllUserArticles/DeleteArticleModal.component';
+import Footer from '../../components/Footer';
 const AllUserArticles = () => {
   const navigate = useNavigate();
   const { userProfile } = useProfileStore((state) => ({
@@ -53,7 +54,7 @@ const AllUserArticles = () => {
   });
 
   return (
-    <div>
+    <div className='mb-[10rem]'>
       {/* if  userArticleLoading is true open loading animation or display content*/}
       {userArticleLoading ? (
         <div className='mx-[45%] my-[20%] h-full'>
@@ -74,7 +75,7 @@ const AllUserArticles = () => {
               Seems like you have not posted any article!
             </div>
           ) : (
-            <div className='flex flex-col gap-[1.6rem] mb-5 flex-wrap mx-10'>
+            <div className='flex flex-col   gap-[1.6rem] flex-wrap mx-10'>
               {Array.isArray(slicedUserArticles) &&
                 slicedUserArticles?.map((post) => (
                   <div
@@ -174,6 +175,7 @@ const AllUserArticles = () => {
           )}
         </div>
       )}
+      <Footer />
     </div>
   );
 };

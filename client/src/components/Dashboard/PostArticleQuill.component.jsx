@@ -47,7 +47,7 @@ const PostArticleQuill = () => {
   ];
 
   return (
-    <main className={`min-w-[70%] grid place-items-center  `}>
+    <main className={`min-w-[100%] grid place-items-center  `}>
       <div
         onClick={(e) => e.stopPropagation()}
         className='  bg-[#ffffff] shadow-lg top-[10%] left-[20%] rounded-lg   w-[80%]  h-[24.4rem] sm:h-[26rem] md:h-[25rem]'

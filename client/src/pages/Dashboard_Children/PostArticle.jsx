@@ -16,7 +16,7 @@ const PostArticle = () => {
   }
 
   return (
-    <main className=' flex flex-col justify-center items-center lg:ml-[5rem]  bg-gray-100 p-3 rounded-md'>
+    <main className=' flex flex-col justify-center items-center lg:ml-[5rem]  p-3 rounded-md'>
       {/* post article form component */}
       <PostArticleForm />
       {/* post article Text editor */}

@@ -64,7 +64,8 @@ const MainContent = () => {
       </Routes>
       {location.pathname === '/dashboard/postArticle' ||
       location.pathname === '/dashboard/update' ||
-      location.pathname === '/dashboard/profile' ? null : (
+      location.pathname === '/dashboard/profile' ||
+      location.pathname === '/dashboard/articles' ? null : (
         <Footer />
       )}
     </>
