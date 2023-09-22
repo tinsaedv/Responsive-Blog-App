@@ -1,5 +1,8 @@
+const path = require('path');
+let frontPic = path.join(__dirname, '../assets/LIve Chat.png');
+
+// import frontPic from '../assets/LIve Chat.png';
 import Articles from '../components/Home/HomeArticles.component';
-import frontPic from '../assets/LIve Chat.png';
 import InputSearch from '../components/Home/InputSearch.Component';
 import { useArticleStore } from '../App/useArticleStore';
 import { useEffect } from 'react';
