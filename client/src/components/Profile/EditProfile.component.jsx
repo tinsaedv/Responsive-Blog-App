@@ -18,9 +18,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     githubValue,
     linkedInValue,
     professionValue,
-    socialInfos,
   } = useProfileStore((state) => ({
-    socialInfos: state.socialInfos,
     setSocialInfos: state.setSocialInfos,
     updateUserSocials: state.updateUserSocials,
 
@@ -49,7 +47,6 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     setSocialInfos(name, value);
   }
 
-  console.log('socialInfos', socialInfos);
   return (
     <form
       className={`${

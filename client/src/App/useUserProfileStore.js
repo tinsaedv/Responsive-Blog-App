@@ -110,7 +110,7 @@ const useProfileStore = create((set, get) => ({
 
     // Get the token from the user object
     const token = user.token;
-    console.log('token', token);
+
     try {
       const updatedSocials = get().socialInfos.filter(
         (social) => social.link !== ''
