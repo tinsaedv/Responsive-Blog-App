@@ -15,7 +15,7 @@ const Settings = () => {
   }));
 
   return (
-    <main className=' flex flex-col justify-center items-center lg:ml-[5rem] relative bg-gray-100 p-3 rounded-md'>
+    <main className=' flex flex-col justify-center items-center lg:ml-[5rem] relative bg-gray-100 dark:bg-gray-700 p-3 rounded-md'>
       <div className='flex gap-5 font-medium items-center'>
         <p className='font-Roboto'>Delete Account Permanently</p>
         <button
@@ -30,7 +30,7 @@ const Settings = () => {
         onClick={(e) => e.stopPropagation()}
         className={`${
           deleteBtnClicked ? 'block' : 'hidden'
-        } z-30 bg-white absolute sm:right-[10%] sm:left-[10%] sm:top-[8rem] top-[8rem] right-0  text-center shadow-md rounded-md p-2`}
+        } z-30 bg-white dark:bg-gray-700 absolute sm:right-[10%] sm:left-[10%] sm:top-[8rem] top-[8rem] right-0  text-center shadow-md rounded-md p-2`}
       >
         <HiOutlineExclamationCircle className='mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200' />
         <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
@@ -43,12 +43,12 @@ const Settings = () => {
             onClick={() => {
               deleteAccount && deleteAccount(user?._id);
               navigate('/');
-              window.location.reload();
+              // window.location.reload();
               window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
               });
-              localStorage.removeItem('User');
+              // localStorage.removeItem('User');
             }}
           >
             Yes, I&apos;m sure
