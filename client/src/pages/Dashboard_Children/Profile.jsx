@@ -36,10 +36,20 @@ const Profile = () => {
     setIsHovered(false);
   }, []);
 
+  function formatCount(num) {
+    if (num >= 1e6) {
+      return (num / 1e6).toFixed(1) + 'M';
+    } else if (num >= 1e3) {
+      return (num / 1e3).toFixed(1) + 'k';
+    } else {
+      return num;
+    }
+  }
+
   return (
-    <main className='flex mt-5 sm:mt-0 lg:ml-[9%] justify-center flex-col gap-5 '>
+    <main className='flex mt-5 sm:mt-0 lg:ml-[9%] justify-center flex-col gap-5 dark:bg-gray-800'>
       <div className=' flex lg:mx-[15%]  gap-5 justify-center items-center flex-col lg:flex-row'>
-        <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm bg-gradient-to-tr from-blue-100 to-red-100 shadow-xl   flex-col items-center justify-center'>
+        <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm bg-gradient-to-tr from-blue-200 to-red-200 shadow-xl dark:from-blue-400 dark:to-red-400    flex-col items-center justify-center'>
           <BiSolidPencil
             onClick={() => {
               setEditIsClicked(!editIsClicked);
@@ -85,16 +95,16 @@ const Profile = () => {
           )}
           <div className='relative'>
             {' '}
-            <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white'>
+            <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center text-gray-900 '>
               {userProfile && userProfile?.name}
             </p>
             {/* Author profession */}
             {userProfile && userProfile?.profession && (
-              <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-white'>
+              <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-300'>
                 {userProfile?.profession}
               </p>
             )}
-            {userProfile && userProfile?.stats[0]?.verified ? (
+            {userProfile && userProfile?.stats?.verified ? (
               <div className='flex gap-[0.5rem] absolute top-0 right-[-5rem]'>
                 <img src={verified} alt='' />
                 <p className='text-[#5A7184] sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
@@ -107,24 +117,24 @@ const Profile = () => {
           <div className='w-[70%]'>
             {/* Author bio */}
             {userProfile?.bio && (
-              <p className='gap-3  items-center italic font-medium text-gray-400 my-3'>
+              <p className='gap-3 dark:text-gray-700  items-center italic font-medium text-gray-600  my-3'>
                 &quot;{userProfile?.bio}&quot;
               </p>
             )}
           </div>
 
           <div className='flex gap-5'>
-            <p className='font-openSans font-semibold'>
-              Followers: {userProfile?.stats[0]?.followersCount}
+            <p className='font-openSans dark:text-gray-800 font-semibold'>
+              Followers: {formatCount(userProfile?.stats?.followersCount)}
             </p>
-            <p className='font-openSans font-semibold'>
-              Following: {userProfile?.stats[0]?.followingCount}
+            <p className='font-openSans dark:text-gray-800 font-semibold'>
+              Following: {formatCount(userProfile?.stats?.followingCount)}
             </p>
-            <p className='font-openSans font-semibold'>
-              Articles: {userProfile?.stats[0]?.articlesCount}
+            <p className='font-openSans dark:text-gray-800 font-semibold'>
+              Articles: {formatCount(userProfile?.stats?.articlesCount)}
             </p>
           </div>
-          <p className='mt-[1rem] font-openSans font-semibold italic text-[1rem]'>
+          <p className='mt-[1rem] font-openSans dark:text-gray-800 font-semibold italic text-[1rem]'>
             Follow me on social media!
           </p>
 
@@ -136,7 +146,7 @@ const Profile = () => {
           setEditIsClicked={setEditIsClicked}
         />
       </div>
-      <div className=' flex  gap-5 justify-center items-center flex-col md:flex-row'>
+      <div className=' flex mt-10  gap-5 justify-center items-center flex-col md:flex-row'>
         {userArticles && userArticles.length >= 1 ? (
           <ProfileRecentArticles />
         ) : (
