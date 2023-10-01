@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply pt-[4rem] lg:pt-[6.25rem];
-  background: #f9fcff;
-  /* background: #333333; */
-  height: 100vh;
+  @apply pt-[4rem] lg:pt-[6.25rem] dark:text-white dark:bg-gray-800 bg-[#f9fcff] h-screen transition-all duration-150 ease-in;
 }
 
 .navLinks {
