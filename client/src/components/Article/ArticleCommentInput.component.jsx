@@ -25,7 +25,7 @@ const ArticleCommentInput = memo(({ articleId }) => {
       <textarea
         value={comment}
         onChange={handleOnChangeInput}
-        className='w-full px-3 py-2 h-full outline-none resize-none'
+        className='w-full px-3 py-2 h-full outline-none resize-none dark:bg-gray-200 dark:text-gray-700'
         rows='4'
         placeholder='Type your comment here...'
       ></textarea>
