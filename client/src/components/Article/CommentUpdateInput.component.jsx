@@ -30,7 +30,7 @@ const CommentUpdateInput = ({ comment }) => {
       {commentInputOpen && (
         <>
           <input
-            className='rounded-md bg-slate-200'
+            className='rounded-md bg-slate-200 dark:bg-gray-500'
             type='text'
             value={updateComment}
             ref={ref}

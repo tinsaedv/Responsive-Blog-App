@@ -19,8 +19,8 @@ const RecentArticles = () => {
 
   return (
     <div className='mt-[3.69rem] min-w-[23rem]'>
-      <div className='mx-[1.5rem]  px-[1.06rem]  py-[1.13rem] shadow-xl rounded-lg'>
-        <h1 className='mb-[1.25rem] text-[#0D2436] font-Roboto text-[1rem] font-medium'>
+      <div className='mx-[1.5rem] dark:bg-gray-600  px-[1.06rem]  py-[1.13rem] shadow-xl rounded-lg'>
+        <h1 className='mb-[1.25rem] text-[#0D2436] dark:text-white  font-Roboto text-[1rem] font-medium'>
           Latest Articles
         </h1>
 
@@ -33,7 +33,7 @@ const RecentArticles = () => {
                     top: 0,
                     behavior: 'smooth',
                   });
-                  navigate(`/article/get/${article?._id}`);
+                  navigate(`/article/${article?._id}`);
                   getArticleById(article?._id);
                 }}
                 key={article._id}
@@ -48,7 +48,7 @@ const RecentArticles = () => {
                 </div>
 
                 <div className='cursor-pointer'>
-                  <h1 className='text-[#0D2436] mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
+                  <h1 className='text-[#0D2436] dark:text-gray-300 mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
                     {article?.title}
                   </h1>
                   <p className='font-openSans text-[0.625rem] font-light'>
@@ -59,7 +59,7 @@ const RecentArticles = () => {
             ))}
         </div>
 
-        <h1 className='mb-[1.25rem] mt-[1.84rem] text-[#0D2436] font-Roboto text-[1rem] font-medium'>
+        <h1 className='mb-[1.25rem] mt-[1.84rem] dark:text-white  text-[#0D2436] font-Roboto text-[1rem] font-medium'>
           Tags
         </h1>
 
