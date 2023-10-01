@@ -9,9 +9,9 @@ const Tags = () => {
   const tagsChecked = Array.isArray(tags) ? tags : [];
 
   return (
-    <div className='lg:min-w-[80%] my-5'>
+    <div className='lg:min-w-[80%] my-5 dark:text-black'>
       <TagsInput
-        className='w-10'
+        className='w-10 dark:text-black'
         onChange={setTags}
         value={tagsChecked}
         name='article tags'
