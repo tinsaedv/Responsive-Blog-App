@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  plugins: [require('flowbite/plugin')],
+  plugins: [import('flowbite/plugin')],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -9,5 +10,6 @@ export default {
         Roboto: `'Roboto', sans-serif`,
       },
     },
+  
   },
 };
