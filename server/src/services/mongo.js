@@ -13,7 +13,11 @@ mongoose.connection.on('error', (err) => {
 const mongo_uri = process.env.MONGO_URI;
 
 async function mongoConnect() {
-  await mongoose.connect(mongo_uri);
+  try {
+    await mongoose.connect(mongo_uri);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
 module.exports = mongoConnect;
