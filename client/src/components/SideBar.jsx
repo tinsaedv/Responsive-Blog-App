@@ -37,11 +37,11 @@ const SideBar = () => {
         id='default-sidebar'
         className={`${
           sideBarOpen ? 'block lg:hidden' : 'hidden lg:block'
-        } fixed top-[4rem]  lg:top-[6rem] left-0 z-40 w-[12.9rem] h-screen transition-transform translate-x-0 `}
+        } fixed top-[4rem] lg:block  lg:top-[6rem] left-0 z-40 w-[12.9rem] h-screen transition-transform translate-x-0 `}
         aria-label='Sidebar'
       >
         <MdClose
-          className='absolute sm:hidden cursor-pointer text-[1.5rem] text-gray-400 right-0'
+          className='absolute lg:hidden cursor-pointer text-[1.5rem] text-gray-400 right-0'
           onClick={() => setSideBarOpen(false)}
         />
         <div
