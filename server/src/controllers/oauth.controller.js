@@ -1,4 +1,5 @@
 const passport = require('passport');
+const UserModel = require('../models/user.model');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 function googleLogin() {
@@ -9,8 +10,8 @@ function googleLogin() {
 
 function googleCallback() {
   passport.authenticate('google', {
-    successRedirect: '/secret',
-    failureRedirect: '/failure',
+    successRedirect: '/',
+    failureRedirect: '/',
     session: true,
   });
 }
@@ -35,10 +36,44 @@ function googleLogout(req, res) {
 //   return res.sendFile(path.join(__dirname, '../public/index.html'));
 // }
 
-function verifyCallback(accessToken, refreshToken, profile, done) {
-  console.log(profile);
-  done(null, profile);
+async function verifyCallback(accessToken, refreshToken, profile, done) {
+  try {
+    let user = await UserModel.findOne({
+      email: profile?._json?.email,
+    });
+
+    if (user) {
+      return console.log(user);
+    }
+
+    if (!user) {
+      user = new UserModel({
+        profilePicture: profile?._json.picture,
+        profilePicturePublicId: '',
+        name: profile?.name?.givenName + ' ' + profile?.name?.familyName,
+        email: profile?._json?.email,
+        bio: '',
+        profession: '',
+        socials: {
+          facebook: '',
+          instagram: '',
+          linkedIn: '',
+          twitter: '',
+          github: '',
+        },
+        google: true,
+      });
+
+      await user.save();
+    }
+
+    done(null, user);
+  } catch (error) {
+    console.error(error.message);
+    done(error);
+  }
 }
+// console.log(verifyCallback());
 
 module.exports = {
   googleLogin,
