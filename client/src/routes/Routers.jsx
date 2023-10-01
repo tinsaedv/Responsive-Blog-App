@@ -55,7 +55,7 @@ const MainContent = () => {
           />
           <Route path='settings' element={user ? <Settings /> : <Login />} />
         </Route>
-        <Route path='/article/get/:id' element={<Article />} />
+        <Route path='/article/:id' element={<Article />} />
         <Route path='/articles' element={<AllArticles />} />
         <Route path='/articles/:category' element={<AllArticles />} />
         {/* <Route path='/post' element={user ? <PostArticle /> : <Login />} /> */}
