@@ -50,6 +50,9 @@ const useProfileStore = create((set, get) => ({
   linkedInValue: '',
   professionValue: '',
 
+  pageTheme: 'dark',
+  setPageTheme: (state) => set({ pageTheme: state }),
+
   // Function to get profile info values
   getProfileInfoValue: () => {
     const state = get(); // Get current state
@@ -86,6 +89,8 @@ const useProfileStore = create((set, get) => ({
   getUserProfile: async () => {
     try {
       set({ userProfileError: null, userProfileLoading: true }); // Set loading state
+
+      if (!useUserStore.getState().user) return;
 
       const response = await getRequest(
         `${BASE_URL}/users/${useUserStore.getState().user?._id}`
@@ -187,7 +192,7 @@ const useProfileStore = create((set, get) => ({
   // Function to follow author
   followAuthor: async (userId) => {
     // Get the user object from local storage
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('User'));
 
     // Get the token from the user object
     const token = user.token;
