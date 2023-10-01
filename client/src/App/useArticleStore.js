@@ -22,7 +22,7 @@ const useArticleStore = create((set, get) => ({
   userArticles: [],
 
   // Object to hold a single article
-  article: null,
+  article: [],
 
   // Array to hold all articles
   allArticles: [],
