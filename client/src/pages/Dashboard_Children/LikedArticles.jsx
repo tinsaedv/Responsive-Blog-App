@@ -25,14 +25,15 @@ const LikedArticles = () => {
   });
 
   return (
-    <main className=' flex flex-col justify-center items-center w-full  relative bg-gray-100 rounded-md'>
+    <main className=' flex flex-col justify-center items-center w-full  relative bg-gray-100 dark:bg-gray-700 rounded-md'>
       <div>
         <div className='lg:mx-[10rem]'>
-          <p className='font-Roboto w-full font-semibold text-[1.5rem] mb-5 text-center'>
+          <p className='font-Roboto w-full font-semibold text-[1.5rem] my-5 text-center'>
             Articles you liked
           </p>
-          {Array.isArray(userProfile) &&
-          userProfile?.likedArticles.length === 0 ? (
+          {(Array.isArray(userProfile) &&
+            userProfile?.likedArticles.length === 0) ||
+          !userProfile?.likedArticles ? (
             <div className='text-center'>
               Seems like you have not liked any article!
             </div>
@@ -51,7 +52,7 @@ const LikedArticles = () => {
                           top: 0,
                           behavior: 'smooth',
                         });
-                        navigate(`/article/get/${article?._id}`);
+                        navigate(`/article/${article?._id}`);
                         getArticleById(article?._id);
                       }}
                     >
