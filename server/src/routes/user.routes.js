@@ -16,8 +16,8 @@ UserRouter.post('/register', registerUser)
   .post('/login', loginUser)
   .get('/:id', getUserById)
   .get('/', getAllUsers)
-  .get('/follow/:userId/:followerId', verifyToken, follow)
+  .get('/follow/:userId/:followerId', follow)
   .post('/updateProfile', updateProfile)
-  .delete('/delete/:userId', verifyToken, deleteAccount);
+  .delete('/delete/:userId', deleteAccount);
 
 module.exports = UserRouter;
