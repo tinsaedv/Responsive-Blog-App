@@ -21,6 +21,7 @@ const UpdateArticleForm = () => {
     <form className='flex min-w-[80%] justify-center flex-col mx-[10rem] mb-[2rem] gap-3'>
       <label>Title:</label>
       <input
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         value={updateTitle}
         onChange={(e) => setUpdateTitle(e.target.value)}
@@ -28,6 +29,7 @@ const UpdateArticleForm = () => {
       />
       <label>Summary:</label>
       <input
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         value={updateSummary}
         onChange={(e) => setUpdateSummary(e.target.value)}
@@ -35,6 +37,7 @@ const UpdateArticleForm = () => {
       />
       <label>Category:</label>
       <select
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         value={updateCategory}
         name='category'
         onChange={(e) => setUpdateCategory(e.target.value)}

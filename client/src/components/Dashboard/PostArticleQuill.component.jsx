@@ -53,7 +53,7 @@ const PostArticleQuill = () => {
         className='  bg-[#ffffff] shadow-lg top-[10%] left-[20%] rounded-lg   w-[80%]  h-[24.4rem] sm:h-[26rem] md:h-[25rem]'
       >
         <ReactQuill
-          className='h-[17rem] sm:h-[20rem] md:h-[21rem] outline-none border-none'
+          className='h-[17rem] dark:text-black   sm:h-[20rem] md:h-[21rem] outline-none border-none'
           modules={modules}
           theme='snow'
           value={body}

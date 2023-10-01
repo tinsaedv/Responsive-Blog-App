@@ -12,18 +12,24 @@ const PostArticleForm = () => {
       <label>Title:</label>
       <input
         type='text'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         onChange={(e) => setTitle(e.target.value)}
         placeholder='Enter article title'
       />
       <label>Summary:</label>
 
       <input
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         onChange={(e) => setSummary(e.target.value)}
         placeholder='Enter article summary'
       />
       <label>Category:</label>
-      <select name='category' onChange={(e) => setCategory(e.target.value)}>
+      <select
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
+        name='category'
+        onChange={(e) => setCategory(e.target.value)}
+      >
         <option value=''>--Select Category--</option>
         <option value='Finance'>Finance</option>
         <option value='Art'>Art</option>
