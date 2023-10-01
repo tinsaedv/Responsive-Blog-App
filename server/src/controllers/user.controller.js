@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const validator = require('validator');
 const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
+const ArticleModel = require('../models/articles.model');
 const cloudinary = require('cloudinary').v2;
 
 require('dotenv').config();
@@ -258,6 +259,7 @@ async function getAllUsers(req, res) {
 async function follow(req, res) {
   // Extract the userId and followerId parameters from the request
   const { userId, followerId } = req.params;
+  console.log(req.params);
 
   try {
     // Find the user to follow
@@ -286,15 +288,15 @@ async function follow(req, res) {
     // If the follower does not exist in the user's followers array
     if (!followerExist) {
       // Increment the followers count of the user and the following count of the follower
-      user.stats[0].followersCount++;
-      follower.stats[0].followingCount++;
+      user.stats.followersCount++;
+      follower.stats.followingCount++;
       // Add the follower to the user's followers array
       user.followers.push(followerId);
     } else {
       // If the follower exists in the user's followers array
       // Decrement the followers count of the user and the following count of the follower
-      user.stats[0].followersCount--;
-      follower.stats[0].followingCount--;
+      user.stats.followersCount--;
+      follower.stats.followingCount--;
       // Remove the follower from the user's followers array
       user.followers = user.followers.filter((follower) => {
         return follower.toString() !== followerId;
@@ -401,6 +403,10 @@ async function deleteAccount(req, res) {
         error: 'User not found!',
       });
     }
+
+    // const article = await ArticleModel.deleteMany({
+    //   articleAuthorId: userId,
+    // });
 
     // Get the user's profile picture public ID
     const profilePicturePublicId = userToDelete?.profilePicturePublicId;
