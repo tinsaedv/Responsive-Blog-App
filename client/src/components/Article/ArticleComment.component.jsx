@@ -2,13 +2,13 @@ import { FiMessageSquare } from 'react-icons/fi';
 import { RiPencilFill } from 'react-icons/ri';
 import { MdOutlineDelete } from 'react-icons/md';
 import useCommentStore from '../../App/useCommentStore';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useUserStore } from '../../App/useAuthStore';
 import { useArticleStore } from '../../App/useArticleStore';
 import CommentUpdateInput from './CommentUpdateInput.component';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-const ArticleComment = memo(({ articleId }) => {
+const ArticleComment = ({ articleId }) => {
   const { user } = useUserStore((state) => ({
     user: state.user,
   }));
@@ -43,6 +43,7 @@ const ArticleComment = memo(({ articleId }) => {
     articleId && getCommentsByArticleId(articleId);
   }, [articleId, postComment, getCommentsByArticleId]);
 
+  console.log('responseComment', responseComment);
   return (
     <div className='mx-[1.6rem] mt-[3.13rem] '>
       <p className='mb-[1rem] font-Roboto text-[1rem] font-bold'>
@@ -54,22 +55,21 @@ const ArticleComment = memo(({ articleId }) => {
         responseComment?.map((comment) => (
           <div
             key={comment?._id}
-            className='flex gap-[0.5rem] relative bg-[#F2F4F5] rounded-lg py-[0.75rem] px-[0.69rem] '
+            className='flex gap-[0.5rem] relative bg-[#F2F4F5] dark:bg-gray-700 rounded-lg py-[0.75rem] px-[0.69rem] '
           >
             <img
-              className='w-[2.5rem] h-[2.5rem] rounded-[62.4375rem]'
+              className='w-[2.5rem] h-[2.5rem] object-cover rounded-[62.4375rem]'
               src={comment?.authorPic}
               alt=''
             />
 
-            <div>
-              <h1 className='text-[0.825rem] sm:text-[0.875rem] text-[#0D2436] font-Roboto font-bold'>
-                {comment.author}
+            <div className='dark:bg-gray-700 '>
+              <h1 className='text-[0.825rem] sm:text-[0.875rem] dark:text-white  text-[#0D2436] font-Roboto font-bold'>
+                {comment.author}{' '}
               </h1>
-              <p className='mb-[0.5rem] sm:text-[0.625rem] text-[#77808B] text-[0.625rem] font-openSans'>
+              <p className='mb-[0.5rem] dark:text-gray-300 sm:text-[0.625rem] text-[#77808B] text-[0.625rem] font-openSans'>
                 {moment(comment.createdAt).format('Do MMMM  YYYY, h:mm a')}
               </p>
-              {comment?.edited && <p>(edited)</p>}
 
               {/* if the user clicks on edit button hide the comment text */}
               {comment._id !== editingCommentId && (
@@ -77,14 +77,17 @@ const ArticleComment = memo(({ articleId }) => {
                   className={`${
                     article?.articleAuthorId === comment?.commentAuthorId &&
                     'bg-[#77808B] text-white rounded-md px-3 inline-block'
-                  } mb-[0.75rem] sm:text-[1rem] text-[#77808B] text-[0.925rem] font-openSans`}
+                  } mb-[0.75rem] sm:text-[1rem] dark:text-gray-300 text-[#77808B] text-[0.925rem] font-openSans`}
                 >
-                  {comment.text}
+                  {comment.text}{' '}
+                  {comment?.edited && (
+                    <span className='text-gray-500'>(edited)</span>
+                  )}
                 </p>
               )}
 
               {/* only show the input text field for the comment author */}
-              {comment._id === editingCommentId && (
+              {comment?._id === editingCommentId && (
                 <CommentUpdateInput comment={comment} />
               )}
               <div className='flex gap-5'>
@@ -130,7 +133,7 @@ const ArticleComment = memo(({ articleId }) => {
               </div>
               {deletingCommentId === comment?._id && deleteButtonClicked ? (
                 <div
-                  className={`z-30 absolute top-0 right-[3rem] bg-white text-center shadow-lg rounded-md p-2`}
+                  className={`z-30 absolute top-0 right-[10%] dark:bg-gray-600 bg-white text-center shadow-lg rounded-md p-2`}
                 >
                   <HiOutlineExclamationCircle className='mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200' />
                   <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
@@ -160,6 +163,6 @@ const ArticleComment = memo(({ articleId }) => {
         ))}
     </div>
   );
-});
+};
 
 export default ArticleComment;
