@@ -80,10 +80,10 @@ const AllUserArticles = () => {
                 slicedUserArticles?.map((post) => (
                   <div
                     key={post?._id}
-                    className='flex bg-[#ececec]  rounded-[0.75rem] items-center relative gap-4'
+                    className='flex bg-[#ececec] dark:bg-gray-700 rounded-[0.75rem] items-center relative gap-4'
                   >
                     <Link
-                      to={`/article/get/${post?._id}`}
+                      to={`/article/${post?._id}`}
                       onClick={() => {
                         getArticleById(post?._id);
                         window.scrollTo({
@@ -101,8 +101,8 @@ const AllUserArticles = () => {
                         />
                       </div>
 
-                      <div>
-                        <h1 className='text-[#0D2436] mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
+                      <div className='pt-5'>
+                        <h1 className='text-[#0D2436] dark:text-white mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
                           {post?.title}
                         </h1>
                         <p>{post.summary}</p>
