@@ -2,14 +2,19 @@ import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../App/useAuthStore';
 
 const Login = () => {
-  const { loginUser, loginLoading, setLoginInfo, loginError } = useAuthStore(
-    (state) => ({
-      loginUser: state.loginUser,
-      setLoginInfo: state.setLoginInfo,
-      loginLoading: state.loginLoading,
-      loginError: state.loginError,
-    })
-  );
+  const {
+    loginUser,
+    loginLoading,
+    setLoginInfo,
+    loginError,
+    continueWithGoogle,
+  } = useAuthStore((state) => ({
+    loginUser: state.loginUser,
+    setLoginInfo: state.setLoginInfo,
+    loginLoading: state.loginLoading,
+    loginError: state.loginError,
+    continueWithGoogle: state.continueWithGoogle,
+  }));
 
   function handleInputChange(e) {
     e.preventDefault();
@@ -26,22 +31,22 @@ const Login = () => {
       <p className='text-center font-Roboto font-bold  text-[1.5rem] mb-[1.3rem]'>
         Login
       </p>
-      <label className='self-start text-[.9rem] text-[#5A7184] mb-[0.75rem] font-openSans font-semibold'>
+      <label className='self-start text-[.9rem] text-[#5A7184]  mb-[0.75rem] font-openSans font-semibold'>
         Name Or Email
       </label>
       <input
-        className='w-full mb-[1.5rem] outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
+        className='dark:text-gray-600 w-full mb-[1.5rem] outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         onChange={handleInputChange}
         name='nameOrEmail'
         type='text'
         placeholder='Enter name or email'
       />
 
-      <label className='self-start text-[.9rem] mb-[0.75rem] text-[#5A7184] font-openSans font-semibold'>
+      <label className='self-start  text-[.9rem] mb-[0.75rem] text-[#5A7184] font-openSans font-semibold'>
         Password
       </label>
       <input
-        className='w-full outline-none mb-[1.5rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
+        className='w-full outline-none dark:text-gray-600 mb-[1.5rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
         onChange={handleInputChange}
         name='password'
         type='password'
@@ -71,6 +76,15 @@ const Login = () => {
             Register here
           </Link>
         </p>
+        <hr />
+        <a
+          href='http://localhost:4000/auth/google'
+          // onClick={() => continueWithGoogle()}
+          type='button'
+          className='py-2 px-4 shadow-lg'
+        >
+          Continue with Google
+        </a>
       </div>
     </form>
   );
