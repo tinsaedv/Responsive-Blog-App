@@ -2,7 +2,13 @@
 import { create } from 'zustand';
 
 // Importing the BASE_URL and request methods from the request utility file
-import { BASE_URL, deleteRequest, postRequest } from '../utils/request';
+import {
+  BASE_URL,
+  Google_URL,
+  continueWithGoogle,
+  deleteRequest,
+  postRequest,
+} from '../utils/request';
 
 // Importing the toast function from 'react-toastify' for displaying notifications
 import { toast } from 'react-toastify';
@@ -110,6 +116,23 @@ const useAuthStore = create((set, get) => ({
       set({ loginLoading: false });
 
       // If there's an error in the response, handle it
+      if (response.error) {
+        return set({ loginError: response });
+      }
+
+      // If login is successful, save the user data in local storage
+      localStorage.setItem('User', JSON.stringify(response));
+      useUserStore.setState({ user: response }); // Update the user store with the new user data
+      window.location.reload(); // Reload the page
+    } catch (error) {
+      console.error(error.message); // Log any error that occurs during the process
+    }
+  },
+
+  continueWithGoogle: async () => {
+    try {
+      const response = await continueWithGoogle(`${Google_URL}/google`);
+
       if (response.error) {
         return set({ loginError: response });
       }
