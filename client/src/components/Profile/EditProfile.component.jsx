@@ -51,11 +51,11 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
     <form
       className={`${
         editIsClicked ? 'block' : 'hidden'
-      } relative flex flex-col p-5 rounded-md shadow-md lg:min-w-[50%] w-[90%] bg-gray-50  sm:w-[70%]  md:w-[60%] top-[3rem]`}
+      } relative flex flex-col p-5 rounded-md shadow-md lg:min-w-[50%] w-[90%] bg-gray-50 dark:bg-gray-700 sm:w-[70%]  md:w-[60%] top-[3rem]`}
     >
       <label>Username:</label>
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='name'
         defaultValue={nameValue}
@@ -66,7 +66,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Bio:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='bio'
         defaultValue={bioValue}
@@ -77,7 +77,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Profession:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='bio'
         defaultValue={professionValue}
@@ -87,7 +87,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Facebook:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='facebook'
         defaultValue={facebookValue}
@@ -97,7 +97,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Twitter:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='twitter'
         defaultValue={twitterValue}
@@ -107,7 +107,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Instagram:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='instagram'
         defaultValue={instagramValue}
@@ -117,7 +117,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>Github:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='github'
         defaultValue={githubValue}
@@ -127,7 +127,7 @@ const EditProfile = ({ editIsClicked, setEditIsClicked }) => {
       <label>LinkedIn:</label>
 
       <input
-        className='rounded-md p-2'
+        className='dark:text-gray-600 w-full  outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         type='text'
         name='linkedIn'
         defaultValue={linkedInValue}
