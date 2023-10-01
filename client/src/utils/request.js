@@ -1,4 +1,5 @@
 const BASE_URL = 'http://localhost:4000/api';
+const Google_URL = 'http://localhost:4000/auth';
 
 async function postRequest(url, userData, token) {
   try {
@@ -33,8 +34,28 @@ async function getRequest(url, token) {
   try {
     const response = await fetch(url, {
       method: 'get',
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
     });
+    const data = await response.json();
+
+    if (!response.ok) {
+      let message = 'An error occurred!';
+      if (data?.error) {
+        message = data.error;
+      }
+      return message;
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function continueWithGoogle(url) {
+  try {
+    const response = await fetch(url);
+
     const data = await response.json();
 
     if (!response.ok) {
@@ -101,4 +122,12 @@ async function deleteRequest(url, token) {
   }
 }
 
-export { BASE_URL, postRequest, getRequest, updateRequest, deleteRequest };
+export {
+  BASE_URL,
+  Google_URL,
+  postRequest,
+  getRequest,
+  updateRequest,
+  deleteRequest,
+  continueWithGoogle,
+};
