@@ -14,7 +14,7 @@ const AboutAuthor = () => {
   const navigate = useNavigate();
 
   return (
-    <section className='bg-gray-100 w-[80%] rounded-2xl p-10 mt-10 place-self-center'>
+    <section className='bg-gray-100 dark:bg-gray-700 w-[80%] rounded-2xl p-10 mt-10 place-self-center'>
       {article && (
         <div
           onClick={() => {
@@ -57,7 +57,7 @@ const AboutAuthor = () => {
             )}
 
             {article?.authorBio && (
-              <p className='font-openSans text-gray-600 font-light'>
+              <p className='font-openSans dark:text-gray-300 text-gray-600 font-light'>
                 &quot;{article?.authorBio}&quot;
               </p>
             )}
