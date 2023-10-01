@@ -27,7 +27,7 @@ const Register = () => {
         Name
       </label>
       <input
-        className='w-full mb-[1.5rem] outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
+        className='w-full dark:text-gray-600 mb-[1.5rem] outline-none placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1rem] rounded-lg'
         onChange={handleInputChange}
         type='text'
         name='name'
@@ -37,7 +37,7 @@ const Register = () => {
         Email address
       </label>
       <input
-        className='w-full outline-none mb-[1.5rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
+        className='w-full dark:text-gray-600 outline-none mb-[1.5rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
         onChange={handleInputChange}
         type='email'
         name='email'
@@ -49,7 +49,7 @@ const Register = () => {
       </label>
       <input
         name='password'
-        className='w-full outline-none mb-[1.75rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
+        className='w-full dark:text-gray-600 outline-none mb-[1.75rem] placeholder:text-[.9rem] placeholder:text-[#959EAD] font-semibold py-[.6rem] pl-[1.25rem] rounded-lg'
         onChange={handleInputChange}
         type='password'
         placeholder='Enter password'
