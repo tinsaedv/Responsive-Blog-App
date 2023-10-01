@@ -120,12 +120,15 @@ const AllArticles = () => {
           {items?.map((article) => (
             <div
               key={article?._id}
-              className='max-w-xs min-w-[18rem] sm:min-w-[19rem] overflow-hidden  rounded-[0.75rem] shadow-md'
+              className='max-w-xs min-w-[18rem] dark:bg-slate-700 sm:min-w-[19rem] overflow-hidden  rounded-[0.75rem] shadow-md'
             >
               <NavLink
-                to={`/article/get/${article?._id}`}
+                to={`/article/${article?._id}`}
                 onClick={() => {
-                  window.onscroll(0, 0);
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
                   getArticleById(article?._id);
                 }}
               >
@@ -137,10 +140,10 @@ const AllArticles = () => {
                   />
                 </div>
                 <div className='px-[1.25rem]'>
-                  <h1 className='text-[1rem] sm:text-[1.3rem] lg:text-[1.5rem] font-Roboto font-bold leading-[1.5rem] mt-[1rem] lg:mt-[1.94rem] mb-[0.7rem]'>
+                  <h1 className='text-[1.3rem] lg:text-[1.5rem] font-Roboto font-bold leading-[1.5rem] mt-[1rem] lg:mt-[1.94rem] mb-[0.7rem]'>
                     {article?.title}
                   </h1>
-                  <p className='text-[#5A7184] sm:text-[1rem] font-openSans text-[0.8rem] mb-[1.5rem] leading-[1.5rem]'>
+                  <p className='text-[#5A7184] dark:text-gray-400 sm:text-[1rem] font-openSans text-[0.9rem] mb-[1.5rem] leading-[1.5rem]'>
                     {article?.summary}
                   </p>
                 </div>
@@ -167,15 +170,15 @@ const AllArticles = () => {
                 className='flex justify-between cursor-pointer items-center py-[1rem] px-[1rem]'
               >
                 <div className='flex gap-[0.75rem] items-center'>
-                  <div>
+                  <div className='w-[2.5rem] h-[2.5rem] '>
                     <img
-                      className='w-[2.5rem] h-[2.5rem] rounded-[62.4375rem]'
+                      className='w-full h-full object-cover rounded-[62.4375rem]'
                       src={article?.authorPic}
                       alt=''
                     />
                   </div>
                   <div className='flex flex-col gap-[0.13rem]'>
-                    <h1 className='text-[#183B56] sm:text-[1rem] font-openSans text-[0.875rem] font-bold italic'>
+                    <h1 className='text-[#183B56] dark:text-gray-300 sm:text-[1rem] font-openSans text-[0.875rem] font-bold italic'>
                       {article?.author}
                     </h1>
                     {article && article?.verified ? (
@@ -188,7 +191,7 @@ const AllArticles = () => {
                     ) : null}
                   </div>
                 </div>
-                <p className='text-[#5A7184] sm:text-[1rem] text-[0.875rem] italic font-openSans font-bold leading-[1.25rem]'>
+                <p className='text-[#5A7184] dark:text-[#9ec1dd] sm:text-[1rem] text-[0.875rem] italic font-openSans font-bold leading-[1.25rem]'>
                   {moment(article?.createdAt).format('MMM Do YY')}
                 </p>
               </div>
