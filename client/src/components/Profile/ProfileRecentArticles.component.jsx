@@ -25,14 +25,14 @@ const ProfileRecentArticles = () => {
     <main>
       <div className='mt-[3.69rem] min-w-[25rem] mx-[5%]'>
         <div className='mx-[10%]  px-[1.06rem]  py-[1.13rem] shadow-xl rounded-lg'>
-          <h1 className='mb-[1.25rem] text-[#0D2436] font-Roboto text-[1rem] font-medium'>
+          <h1 className='mb-[1.25rem] text-[#0D2436] dark:text-white font-Roboto text-[1rem] font-medium'>
             Your Articles
           </h1>
           <div className='flex gap-[1.6rem] mb-5 flex-col flex-wrap md:flex-row'>
             {Array.isArray(slicedArticle) &&
               slicedArticle?.map((post) => (
                 <Link
-                  to={`/article/get/${post?._id}`}
+                  to={`/article/${post?._id}`}
                   key={post?._id}
                   onClick={() => getArticleById(post?._id)}
                   className='flex gap-3 cursor-pointer'
@@ -46,10 +46,10 @@ const ProfileRecentArticles = () => {
                   </div>
 
                   <div>
-                    <h1 className='text-[#0D2436] mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
+                    <h1 className='text-[#0D2436] dark:text-white  mb-[0.51rem] font-Roboto sm:text-[1rem] text-[0.875rem] font-medium'>
                       {post?.title}
                     </h1>
-                    <p className='font-openSans text-[0.625rem] font-light'>
+                    <p className='font-openSans dark:text-white  text-[0.625rem] font-light'>
                       {moment(post?.createdAt).format('MMM Do YY')}
                     </p>
                   </div>
