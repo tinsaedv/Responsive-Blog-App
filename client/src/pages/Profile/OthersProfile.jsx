@@ -24,7 +24,12 @@ const OthersProfile = () => {
     user: state.user,
   }));
 
-  const alreadyFollowed = otherUserProfile?.followers.includes(user?._id);
+  const alreadyFollowed =
+    user && otherUserProfile?.followers.includes(user?._id);
+
+  console.log('otherUserProfile', otherUserProfile);
+  console.log('user', user);
+
   useEffect(() => {
     getOtherUserProfile(id);
   }, [getOtherUserProfile, id]);
@@ -36,9 +41,19 @@ const OthersProfile = () => {
     otherUserProfile?.socials?.github !== '' ||
     otherUserProfile?.socials?.linkedIn !== '';
 
+  function formatCount(num) {
+    if (num >= 1e6) {
+      return (num / 1e6).toFixed(1) + 'M';
+    } else if (num >= 1e3) {
+      return (num / 1e3).toFixed(1) + 'k';
+    } else {
+      return num;
+    }
+  }
+
   return (
     <main className=' flex  justify-center  items-center flex-col '>
-      <div className='flex sm:w-[70%] max-w-[80%] p-2 break-words   rounded-2xl  backdrop-blur-sm bg-gradient-to-tr from-blue-100 to-red-100 shadow-xl   flex-col items-center justify-center'>
+      <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm bg-gradient-to-tr from-blue-200 to-red-200 shadow-xl dark:from-blue-400 dark:to-red-400    flex-col items-center justify-center'>
         {/* Author profile picture */}
         {otherUserProfile && otherUserProfile.profilePicture !== '' ? (
           <div className='w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] rounded-full overflow-hidden'>
@@ -54,19 +69,19 @@ const OthersProfile = () => {
         )}
         <div className='relative'>
           {/* Author name */}
-          <p className='mb-1 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white'>
+          <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center text-gray-900 '>
             {otherUserProfile?.name}
           </p>
 
           {/* Author profession */}
           {otherUserProfile && otherUserProfile?.profession && (
-            <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-white'>
+            <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-300'>
               {otherUserProfile?.profession}
             </p>
           )}
 
           {/* Author verified check */}
-          {otherUserProfile && otherUserProfile?.stats[0]?.verified ? (
+          {otherUserProfile && otherUserProfile?.stats?.verified ? (
             <div className='flex gap-[0.5rem] absolute top-0 right-[-4rem]'>
               <img src={verified} alt='' />
               <p className='text-[#5A7184] sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
@@ -79,7 +94,7 @@ const OthersProfile = () => {
         <div className='w-[70%]'>
           {/* Author bio */}
           {otherUserProfile?.bio && (
-            <p className='gap-3  items-center italic font-medium text-gray-400 my-3'>
+            <p className='gap-3 dark:text-gray-700  items-center italic font-medium text-gray-600  my-3'>
               &quot;{otherUserProfile?.bio}&quot;
             </p>
           )}
@@ -88,14 +103,14 @@ const OthersProfile = () => {
         {/* Author stats */}
 
         <div className='flex gap-5'>
-          <p className='font-openSans font-semibold'>
-            Followers: {otherUserProfile?.stats[0]?.followersCount}
+          <p className='font-openSans dark:text-gray-800 font-semibold'>
+            Followers: {formatCount(otherUserProfile?.stats?.followersCount)}
           </p>
-          <p className='font-openSans font-semibold'>
-            Following: {otherUserProfile?.stats[0]?.followingCount}
+          <p className='font-openSans dark:text-gray-800 font-semibold'>
+            Following: {formatCount(otherUserProfile?.stats?.followingCount)}
           </p>
-          <p className='font-openSans font-semibold'>
-            Articles: {otherUserProfile?.stats[0]?.articlesCount}
+          <p className='font-openSans dark:text-gray-800 font-semibold'>
+            Articles: {formatCount(otherUserProfile?.stats?.articlesCount)}
           </p>
         </div>
 
