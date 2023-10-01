@@ -69,14 +69,14 @@ const Article = () => {
   const alreadyLiked = article?.likedBy?.includes(user?._id);
 
   return (
-    <main className='mx-[1.5rem] relative top-0   mb-[6.25rem] '>
+    <main className='mx-[1.5rem] relative top-0   mb-[6.25rem] dark:bg-gray-800 transition-all duration-150 ease-in'>
       {/* Bread crumbs */}
-      <section className='flex ml-5' aria-label='Breadcrumb'>
+      <section className='flex ml-5 pt-5' aria-label='Breadcrumb'>
         <ol className='inline-flex items-center space-x-1 md:space-x-3'>
           <li className='inline-flex items-center'>
             <NavLink
               to={'/'}
-              className='inline-flex font-Roboto items-center text-sm  text-[0.75rem] text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-black'
+              className='inline-flex font-Roboto items-center text-sm  text-[0.75rem] text-gray-700  hover:text-blue-600 dark:text-gray-400 dark:hover:text-black'
             >
               Home
             </NavLink>
@@ -95,7 +95,7 @@ const Article = () => {
           <li aria-current='page'>
             <div className='flex items-center'>
               /
-              <span className='ml-1 text-sm  font-Roboto text-[0.75rem] text-gray-500 md:ml-2 dark:text-black'>
+              <span className='ml-1 text-sm  font-Roboto text-[0.75rem] text-gray-500 md:ml-2 dark:text-white'>
                 {article?.title}
               </span>
             </div>
@@ -156,11 +156,11 @@ const Article = () => {
               <h1 className='mt-[0.6rem] text-[#1565D8] mb-[1.06rem] font-Roboto text-[0.875rem] sm:text-[1rem]'>
                 {article?.category}
               </h1>
-              <h2 className='text-[1.375rem] mb-[1.06rem] sm:text-[1.625rem] text-[#0D2436] font-Roboto font-medium'>
+              <h2 className='text-[1.375rem] mb-[1.06rem] sm:text-[1.625rem] text-[#0D2436] dark:text-white font-Roboto font-medium'>
                 {article?.title}
               </h2>
               <div
-                className='ql-editor '
+                className='ql-editor dark:text-white'
                 dangerouslySetInnerHTML={{
                   __html: ` ${article?.body}`,
                 }}
@@ -176,12 +176,15 @@ const Article = () => {
                   <AiFillHeart />
                 </button>
               ) : (
-                <button onClick={handleLike} className='text-[1.5rem]'>
+                <button
+                  onClick={handleLike}
+                  className='text-[1.5rem] dark:text-white'
+                >
                   <AiOutlineHeart />
                 </button>
               )}
 
-              <p>{article?.likes}</p>
+              <p className='dark:text-white'>{article?.likes}</p>
             </div>
 
             {/* Comment box */}
