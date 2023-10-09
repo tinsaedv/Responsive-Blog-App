@@ -66,6 +66,7 @@ const MainContent = () => {
       location.pathname === '/dashboard/update' ||
       location.pathname === '/dashboard/profile' ||
       location.pathname === '/dashboard/articles' ||
+      location.pathname === '/dashboard/settings' ||
       location.pathname === '/dashboard/likedArticles' ? null : (
         <Footer />
       )}
@@ -82,36 +83,3 @@ const Routers = () => {
 };
 
 export default Routers;
-
-// const Routers = () => {
-//   const user = useUserStore((state) => state.user);
-//   const location = useLocation();
-//   return (
-//     <BrowserRouter>
-//       {location.pathname !== '/dashboard' && <NavBar />}
-
-//       <Routes>
-//         <Route path='/' element={user ? <Home /> : <Login />} />
-//         <Route path='/register' element={user ? <Home /> : <Register />} />
-//         <Route path='/login' element={user ? <Home /> : <Login />} />
-//         <Route path='/profile' element={user ? <Profile /> : <Login />} />
-//         <Route path='/dashboard' element={user ? <PostArticle /> : <Login />} />
-//         <Route
-//           path='/article/get/:id'
-//           element={user ? <Article /> : <Login />}
-//         />
-//         <Route path='/articles' element={user ? <AllArticles /> : <Login />} />
-//         <Route
-//           path='/articles/:category'
-//           element={user ? <AllArticles /> : <Login />}
-//         />
-//         {/* <Route path='/post' element={user ? <PostArticle /> : <Login />} /> */}
-//         <Route
-//           path='/users/:id'
-//           element={user ? <OthersProfile /> : <Login />}
-//         />
-//       </Routes>
-//       {!user ? null : <Footer />}
-//     </BrowserRouter>
-//   );
-// };
