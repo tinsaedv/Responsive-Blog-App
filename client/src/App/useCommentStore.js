@@ -80,8 +80,12 @@ const useCommentStore = create((set, get) => ({
       });
 
       // If there is an error in the response, show a toast notification with the error message
-      if (response.error) {
-        return toast.error(response.message);
+      if (
+        response.error &&
+        response.message ===
+          'Comment validation failed: text: Path `text` is required.'
+      ) {
+        return toast.error('Please enter a comment!');
       }
 
       // If the request is successful, update the responseComment state with the new comment

@@ -50,7 +50,7 @@ const useProfileStore = create((set, get) => ({
   linkedInValue: '',
   professionValue: '',
 
-  pageTheme: 'dark',
+  pageTheme: null,
   setPageTheme: (state) => set({ pageTheme: state }),
 
   // Function to get profile info values
