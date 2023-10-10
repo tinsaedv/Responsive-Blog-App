@@ -22,7 +22,7 @@ async function postComment(req, res) {
     // If an error occurs, log the error and return an internal server error response
     console.error(error.message);
     res.status(500).json({
-      error: 'Internal server error',
+      error: error.message,
     });
   }
 }
@@ -47,7 +47,7 @@ async function updateComment(req, res) {
     // If an error occurs, log the error and return an internal server error response
     console.error(error.message);
     res.status(500).json({
-      error: 'Internal server error',
+      error: error.message,
     });
   }
 }
@@ -72,7 +72,7 @@ async function deleteComment(req, res) {
     // If an error occurs, log the error and return an internal server error response
     console.error(error.message);
     res.status(500).json({
-      error: 'Internal server error',
+      error: error.message,
     });
   }
 }
@@ -122,6 +122,7 @@ async function getCommentsByArticleId(req, res) {
           text: 1,
           commentAuthorId: 1,
           createdAt: 1,
+          edited: 1,
           updatedAt: 1,
           author: '$author.name',
           authorPic: '$author.profilePicture',
