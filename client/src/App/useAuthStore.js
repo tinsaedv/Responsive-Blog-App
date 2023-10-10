@@ -154,7 +154,7 @@ const useAuthStore = create((set, get) => ({
   // Function to delete a user account
   deleteAccount: async (userId) => {
     // Get the user object from local storage
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('User'));
 
     // Get the token from the user object
     const token = user.token;

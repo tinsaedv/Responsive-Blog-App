@@ -101,11 +101,12 @@ async function updateRequest(url, userData) {
 }
 
 async function deleteRequest(url, token) {
+  console.log(url);
   try {
     const response = await fetch(url, {
       method: 'delete',
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
