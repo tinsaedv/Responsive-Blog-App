@@ -2,8 +2,6 @@ import ThumbnailUploadInput from '../../components/Image Upload/ThumbnailUploadI
 import { useArticleStore } from '../../App/useArticleStore';
 import Tags from '../../components/Dashboard/Tags';
 import PostArticleForm from '../../components/Dashboard/PostArticleForm.component';
-
-import Footer from '../../components/Footer';
 import PostArticleQuill from '../../components/Dashboard/PostArticleQuill.component';
 
 const PostArticle = () => {
@@ -29,7 +27,6 @@ const PostArticle = () => {
       >
         Post
       </button>
-      <Footer />
     </main>
   );
 };

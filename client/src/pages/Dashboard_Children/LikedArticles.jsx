@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { useProfileStore } from '../../App/useUserProfileStore';
 import moment from 'moment';
 import { useArticleStore } from '../../App/useArticleStore';
-import Footer from '../../components/Footer';
 
 const LikedArticles = () => {
   const { userProfile } = useProfileStore((state) => ({
@@ -25,7 +24,7 @@ const LikedArticles = () => {
   });
 
   return (
-    <main className=' flex flex-col justify-center items-center w-full  relative bg-gray-100 dark:bg-gray-700 rounded-md'>
+    <main className=' flex flex-col justify-center items-center w-full  relative bg-gray-50 pb-10 dark:bg-gray-800 rounded-md'>
       <div>
         <div className='lg:mx-[10rem]'>
           <p className='font-Roboto w-full font-semibold text-[1.5rem] my-5 text-center'>
@@ -43,7 +42,7 @@ const LikedArticles = () => {
                 slicedArticles?.map((article) => (
                   <div
                     key={article?._id}
-                    className=' w-[15rem] overflow-hidden  rounded-[0.75rem] shadow-md'
+                    className=' w-[15rem] overflow-hidden bg-gray-100  dark:bg-gray-700 hover:shadow-xl transition-all ease-in duration-150  rounded-[0.75rem] shadow-md'
                   >
                     <div
                       className='cursor-pointer'
@@ -67,10 +66,10 @@ const LikedArticles = () => {
                         <h1 className='text-[1.3rem] font-Roboto font-bold leading-[1.5rem] mt-[1rem] lg:mt-[1.94rem] mb-[0.7rem]'>
                           {article?.title}
                         </h1>
-                        <p className='text-[#5A7184] sm:text-[1rem] min-w-[90%]  font-openSans text-[0.875rem] mb-[1.5rem] leading-[1.5rem]'>
+                        <p className='text-[#5A7184]  dark:text-gray-400 sm:text-[1rem] min-w-[90%]  font-openSans text-[0.875rem] mb-[1.5rem] leading-[1.5rem]'>
                           {article?.summary}
                         </p>
-                        <p className='text-[#5A7184] py-2 text-end sm:text-[1rem] text-[0.875rem] italic font-openSans font-bold leading-[1.25rem]'>
+                        <p className='text-[#5A7184] dark:text-gray-400 py-2 text-end sm:text-[1rem] text-[0.875rem] italic font-openSans font-bold leading-[1.25rem]'>
                           {moment(article?.createdAt).format('MMM Do YY')}
                         </p>
                       </div>
@@ -81,7 +80,6 @@ const LikedArticles = () => {
           )}
         </div>
       </div>
-      <Footer />
     </main>
   );
 };

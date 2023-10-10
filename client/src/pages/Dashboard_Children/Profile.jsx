@@ -8,7 +8,6 @@ import UploadInput from '../../components/Image Upload/ProfileUploadInput';
 import { useArticleStore } from '../../App/useArticleStore';
 import EditProfile from '../../components/Profile/EditProfile.component';
 import UserSocialLinks from '../../components/Profile/UserSocialLinks.component';
-import Footer from '../../components/Footer';
 import ProfileRecentArticles from '../../components/Profile/ProfileRecentArticles.component';
 
 const Profile = () => {
@@ -36,6 +35,7 @@ const Profile = () => {
     setIsHovered(false);
   }, []);
 
+  //function to format number for follower, following and article count
   function formatCount(num) {
     if (num >= 1e6) {
       return (num / 1e6).toFixed(1) + 'M';
@@ -49,7 +49,7 @@ const Profile = () => {
   return (
     <main className='flex mt-5 sm:mt-0 lg:ml-[9%] justify-center flex-col gap-5 dark:bg-gray-800'>
       <div className=' flex lg:mx-[15%]  gap-5 justify-center items-center flex-col lg:flex-row'>
-        <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm bg-gradient-to-tr from-blue-200 to-red-200 shadow-xl dark:from-blue-400 dark:to-red-400    flex-col items-center justify-center'>
+        <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm   shadow-xl bg-gray-200 dark:bg-gray-600   flex-col items-center justify-center'>
           <BiSolidPencil
             onClick={() => {
               setEditIsClicked(!editIsClicked);
@@ -79,7 +79,7 @@ const Profile = () => {
             <div
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              className='w-[160px]  relative h-[160px] rounded-full overflow-hidden'
+              className='w-[160px] transition-all ease-in duration-150  relative h-[160px] rounded-full overflow-hidden'
             >
               {' '}
               <BiSolidUserCircle
@@ -95,12 +95,12 @@ const Profile = () => {
           )}
           <div className='relative'>
             {' '}
-            <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center text-gray-900 '>
+            <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center dark:text-gray-100 '>
               {userProfile && userProfile?.name}
             </p>
             {/* Author profession */}
             {userProfile && userProfile?.profession && (
-              <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-300'>
+              <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-400'>
                 {userProfile?.profession}
               </p>
             )}
@@ -117,24 +117,24 @@ const Profile = () => {
           <div className='w-[70%]'>
             {/* Author bio */}
             {userProfile?.bio && (
-              <p className='gap-3 dark:text-gray-700  items-center italic font-medium text-gray-600  my-3'>
+              <p className='gap-3 dark:text-gray-300  items-center italic font-medium text-gray-600  my-3'>
                 &quot;{userProfile?.bio}&quot;
               </p>
             )}
           </div>
 
           <div className='flex gap-5'>
-            <p className='font-openSans dark:text-gray-800 font-semibold'>
+            <p className='font-openSans dark:text-gray-300 font-semibold'>
               Followers: {formatCount(userProfile?.stats?.followersCount)}
             </p>
-            <p className='font-openSans dark:text-gray-800 font-semibold'>
+            <p className='font-openSans dark:text-gray-300 font-semibold'>
               Following: {formatCount(userProfile?.stats?.followingCount)}
             </p>
-            <p className='font-openSans dark:text-gray-800 font-semibold'>
+            <p className='font-openSans dark:text-gray-300 font-semibold'>
               Articles: {formatCount(userProfile?.stats?.articlesCount)}
             </p>
           </div>
-          <p className='mt-[1rem] font-openSans dark:text-gray-800 font-semibold italic text-[1rem]'>
+          <p className='mt-[1rem] font-openSans dark:text-gray-100 font-semibold italic text-[1rem]'>
             Follow me on social media!
           </p>
 
@@ -146,15 +146,13 @@ const Profile = () => {
           setEditIsClicked={setEditIsClicked}
         />
       </div>
-      <div className=' flex mt-10  gap-5 justify-center items-center flex-col md:flex-row'>
+      <div className=' flex my-10   gap-5 justify-center items-center flex-col md:flex-row'>
         {userArticles && userArticles.length >= 1 ? (
           <ProfileRecentArticles />
         ) : (
           <div>You have not posted any Articles</div>
         )}
       </div>
-
-      <Footer />
     </main>
   );
 };

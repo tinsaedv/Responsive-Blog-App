@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-// import '../styles/PageNotFound.css';
 const PageNotFound = () => {
   return (
     <div className='w-fit h-fit'>

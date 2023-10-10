@@ -27,9 +27,6 @@ const OthersProfile = () => {
   const alreadyFollowed =
     user && otherUserProfile?.followers.includes(user?._id);
 
-  console.log('otherUserProfile', otherUserProfile);
-  console.log('user', user);
-
   useEffect(() => {
     getOtherUserProfile(id);
   }, [getOtherUserProfile, id]);
@@ -53,7 +50,7 @@ const OthersProfile = () => {
 
   return (
     <main className=' flex  justify-center  items-center flex-col '>
-      <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm bg-gradient-to-tr from-blue-200 to-red-200 shadow-xl dark:from-blue-400 dark:to-red-400    flex-col items-center justify-center'>
+      <div className='flex sm:w-[80%] sm:min-w-[25rem] p-2   rounded-2xl backdrop-blur-sm  shadow-xl  bg-gray-200 dark:bg-gray-600    flex-col items-center justify-center'>
         {/* Author profile picture */}
         {otherUserProfile && otherUserProfile.profilePicture !== '' ? (
           <div className='w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] rounded-full overflow-hidden'>
@@ -69,22 +66,22 @@ const OthersProfile = () => {
         )}
         <div className='relative'>
           {/* Author name */}
-          <p className='mb-1 text-2xl md:text-4xl tracking-tight font-extrabold text-center text-gray-900 '>
+          <p className='mb-1 text-2xl md:text-4xl dark:text-gray-300  tracking-tight font-extrabold text-center text-gray-900 '>
             {otherUserProfile?.name}
           </p>
 
           {/* Author profession */}
           {otherUserProfile && otherUserProfile?.profession && (
-            <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-300'>
+            <p className='mb-5 text-xl md:text-2xl tracking-tight font-bold text-center text-gray-500 dark:text-gray-400'>
               {otherUserProfile?.profession}
             </p>
           )}
 
           {/* Author verified check */}
           {otherUserProfile && otherUserProfile?.stats?.verified ? (
-            <div className='flex gap-[0.5rem] absolute top-0 right-[-4rem]'>
+            <div className='flex gap-[0.5rem] absolute top-0 right-[-5rem]'>
               <img src={verified} alt='' />
-              <p className='text-[#5A7184] sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
+              <p className='text-[#5A7184] dark:text-gray-300  sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
                 Verified
               </p>
             </div>
@@ -94,7 +91,7 @@ const OthersProfile = () => {
         <div className='w-[70%]'>
           {/* Author bio */}
           {otherUserProfile?.bio && (
-            <p className='gap-3 dark:text-gray-700  items-center italic font-medium text-gray-600  my-3'>
+            <p className='gap-3 dark:text-gray-300  items-center italic font-medium text-gray-600  my-3'>
               &quot;{otherUserProfile?.bio}&quot;
             </p>
           )}
@@ -103,13 +100,13 @@ const OthersProfile = () => {
         {/* Author stats */}
 
         <div className='flex gap-5'>
-          <p className='font-openSans dark:text-gray-800 font-semibold'>
+          <p className='font-openSans dark:text-gray-300  font-semibold'>
             Followers: {formatCount(otherUserProfile?.stats?.followersCount)}
           </p>
-          <p className='font-openSans dark:text-gray-800 font-semibold'>
+          <p className='font-openSans dark:text-gray-300  font-semibold'>
             Following: {formatCount(otherUserProfile?.stats?.followingCount)}
           </p>
-          <p className='font-openSans dark:text-gray-800 font-semibold'>
+          <p className='font-openSans dark:text-gray-300  font-semibold'>
             Articles: {formatCount(otherUserProfile?.stats?.articlesCount)}
           </p>
         </div>
@@ -179,7 +176,7 @@ const OthersProfile = () => {
             followAuthor(otherUserProfile?._id);
           }}
           className={`${
-            alreadyFollowed ? 'bg-gray-600 ' : 'bg-blue-500'
+            alreadyFollowed ? 'bg-gray-700 ' : 'bg-blue-500'
           } px-8 py-2 rounded-md my-4 text-white`}
         >
           {alreadyFollowed ? 'Unfollow' : 'Follow'}
@@ -188,7 +185,6 @@ const OthersProfile = () => {
 
       {/* Display Author articles component  */}
       <OthersProfileArticle />
-      {/* {userProfileError && toast.error(`${userProfileError.error}`)} */}
     </main>
   );
 };

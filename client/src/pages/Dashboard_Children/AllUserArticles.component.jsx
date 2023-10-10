@@ -8,7 +8,6 @@ import { BiSolidPencil } from 'react-icons/bi';
 import { BsTrashFill } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import DeleteArticleModal from '../../components/Dashboard/AllUserArticles/DeleteArticleModal.component';
-import Footer from '../../components/Footer';
 const AllUserArticles = () => {
   const navigate = useNavigate();
   const { userProfile } = useProfileStore((state) => ({
@@ -80,7 +79,7 @@ const AllUserArticles = () => {
                 slicedUserArticles?.map((post) => (
                   <div
                     key={post?._id}
-                    className='flex bg-[#ececec] dark:bg-gray-700 rounded-[0.75rem] items-center relative gap-4'
+                    className='flex bg-[#ececec] hover:shadow-xl transition-all ease-in duration-150 dark:bg-gray-700 rounded-[0.75rem] items-center relative gap-4'
                   >
                     <Link
                       to={`/article/${post?._id}`}
@@ -175,7 +174,6 @@ const AllUserArticles = () => {
           )}
         </div>
       )}
-      <Footer />
     </div>
   );
 };

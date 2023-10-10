@@ -120,7 +120,7 @@ const AllArticles = () => {
           {items?.map((article) => (
             <div
               key={article?._id}
-              className='max-w-xs min-w-[18rem] dark:bg-slate-700 sm:min-w-[19rem] overflow-hidden  rounded-[0.75rem] shadow-md'
+              className='max-w-xs min-w-[17rem] dark:bg-gray-700 hover:shadow-xl transition-all ease-in duration-150 sm:min-w-[18rem] overflow-hidden  rounded-[0.75rem] shadow-md'
             >
               <NavLink
                 to={`/article/${article?._id}`}
@@ -184,7 +184,7 @@ const AllArticles = () => {
                     {article && article?.verified ? (
                       <div className='flex gap-[0.5rem]'>
                         <img src={verified} alt='' />
-                        <p className='text-[#5A7184] sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
+                        <p className='text-[#5A7184] dark:text-gray-400 sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
                           Verified
                         </p>
                       </div>

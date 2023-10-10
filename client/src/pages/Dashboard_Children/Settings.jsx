@@ -15,7 +15,7 @@ const Settings = () => {
   }));
 
   return (
-    <main className=' flex flex-col justify-center items-center lg:ml-[5rem] relative bg-gray-100 dark:bg-gray-700 p-3 rounded-md'>
+    <main className=' flex flex-col mt-10 justify-center items-center lg:ml-[5rem] relative bg-gray-100 dark:bg-gray-700 p-3 rounded-md'>
       <div className='flex gap-5 font-medium items-center'>
         <p className='font-Roboto'>Delete Account Permanently</p>
         <button
