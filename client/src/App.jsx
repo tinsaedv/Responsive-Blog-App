@@ -15,16 +15,9 @@ function App() {
     getUserProfile();
   }, [getUserProfile]);
 
-  // useEffect(() => {
-  //   const theme = localStorage.getItem('Theme');
-  //   if (theme) {
-  //     setPageTheme(JSON.parse(theme));
-  //   }
-  // }, [setPageTheme]);
-
+  //Get theme from localStorage and set page theme according to the theme value
   useEffect(() => {
     const theme = localStorage.getItem('Theme');
-    console.log('theme', theme);
     if (theme === '"dark"') {
       document.documentElement.classList.add('dark');
     } else {
