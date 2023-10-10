@@ -12,12 +12,14 @@ function createTokens(_id) {
   // Get the JWT keys from the environment variables
   const jwt_keys = process.env.JWT_KEYS;
   // Sign a new JWT token with the user's ID and the JWT keys, set to expire in 3 days
-  return jwt.sign({ _id }, jwt_keys, { expiresIn: '3d' });
+  return jwt.sign({ _id }, jwt_keys);
 }
 
 function verifyToken(req, res, next) {
   // Get the token from the request headers
-  const token = req.headers['authorization'];
+  const authHeaders = req.headers['authorization'];
+
+  const token = authHeaders.split(' ')[1];
 
   // If no token is provided, return a 401 (unauthorized) status
   if (!token) {
@@ -259,7 +261,6 @@ async function getAllUsers(req, res) {
 async function follow(req, res) {
   // Extract the userId and followerId parameters from the request
   const { userId, followerId } = req.params;
-  console.log(req.params);
 
   try {
     // Find the user to follow
@@ -404,9 +405,9 @@ async function deleteAccount(req, res) {
       });
     }
 
-    // const article = await ArticleModel.deleteMany({
-    //   articleAuthorId: userId,
-    // });
+    const article = await ArticleModel.deleteMany({
+      articleAuthorId: userId,
+    });
 
     // Get the user's profile picture public ID
     const profilePicturePublicId = userToDelete?.profilePicturePublicId;
