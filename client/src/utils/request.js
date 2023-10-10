@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000/api';
+const BASE_URL = 'https://blog-app-tinsae.onrender.com/api';
 const Google_URL = 'http://localhost:4000/auth';
 
 async function postRequest(url, userData, token) {
@@ -6,7 +6,7 @@ async function postRequest(url, userData, token) {
     const response = await fetch(url, {
       method: 'post',
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
@@ -34,7 +34,9 @@ async function getRequest(url, token) {
   try {
     const response = await fetch(url, {
       method: 'get',
-      // Authorization: `Bearer ${token}`,
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     const data = await response.json();
 
@@ -102,7 +104,10 @@ async function deleteRequest(url, token) {
   try {
     const response = await fetch(url, {
       method: 'delete',
-      Authorization: `Bearer ${token}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
     });
 
     const data = await response.json();
