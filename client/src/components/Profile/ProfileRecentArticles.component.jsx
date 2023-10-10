@@ -24,7 +24,7 @@ const ProfileRecentArticles = () => {
   return (
     <main>
       <div className='mt-[3.69rem] min-w-[25rem] mx-[5%]'>
-        <div className='mx-[10%]  px-[1.06rem]  py-[1.13rem] shadow-xl rounded-lg'>
+        <div className='mx-[10%]  px-[1.06rem]  py-[1.13rem] shadow-xl dark:bg-gray-700 rounded-lg'>
           <h1 className='mb-[1.25rem] text-[#0D2436] dark:text-white font-Roboto text-[1rem] font-medium'>
             Your Articles
           </h1>
@@ -67,7 +67,7 @@ const ProfileRecentArticles = () => {
               }
               className='bg-blue-600 my-5 px-4 py-2 rounded-md text-white'
             >
-              View all your articles on dashboard
+              View all your articles
             </Link>
           )}
         </div>

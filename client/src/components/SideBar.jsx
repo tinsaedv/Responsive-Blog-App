@@ -11,7 +11,7 @@ const SideBar = () => {
   const navigate = useNavigate();
   const [sideBarOpen, setSideBarOpen] = useState(false);
   return (
-    <div className='fixed left-0 top-[2rem] mt-[4rem]  h-full z-20'>
+    <div className='fixed left-0 top-[2rem]  mt-[4rem]  h-full z-20'>
       <button
         onClick={() => setSideBarOpen(!sideBarOpen)}
         type='button'
@@ -37,15 +37,15 @@ const SideBar = () => {
         id='default-sidebar'
         className={`${
           sideBarOpen ? 'block lg:hidden' : 'hidden lg:block'
-        } fixed top-[4rem] lg:block  lg:top-[6rem] left-0 z-40 w-[12.9rem] h-screen transition-transform translate-x-0 `}
+        } fixed top-0 lg:block lg:top-[6.2rem] left-0 z-40 w-[12.9rem] h-screen transition-transform translate-x-0  `}
         aria-label='Sidebar'
       >
         <MdClose
-          className='absolute lg:hidden cursor-pointer text-[1.5rem] text-gray-400 right-0'
+          className='absolute hover:bg-slate-200 hover:bg-opacity-20 p-2 rounded-full shadow-md shadow-slate-500/50   transition-all ease-in duration-100 lg:hidden cursor-pointer text-[2.3rem] top-3 text-gray-400 right-2'
           onClick={() => setSideBarOpen(false)}
         />
         <div
-          className={` h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800`}
+          className={` h-full px-3 pt-10 lg:py-7 overflow-y-auto   bg-gray-50 dark:bg-gray-700`}
         >
           <ul className='space-y-2 font-medium'>
             <li>

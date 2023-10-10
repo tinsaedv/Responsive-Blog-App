@@ -43,7 +43,6 @@ const ArticleComment = ({ articleId }) => {
     articleId && getCommentsByArticleId(articleId);
   }, [articleId, postComment, getCommentsByArticleId]);
 
-  console.log('responseComment', responseComment);
   return (
     <div className='mx-[1.6rem] mt-[3.13rem] '>
       <p className='mb-[1rem] font-Roboto text-[1rem] font-bold'>

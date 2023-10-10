@@ -87,7 +87,7 @@ const OthersProfileArticle = () => {
                           {article && article?.verified ? (
                             <div className='flex gap-[0.5rem]'>
                               <img src={verified} alt='' />
-                              <p className='text-[#5A7184] sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
+                              <p className='text-[#5A7184] dark:text-gray-300  sm:text-[0.875rem] text-[0.75rem] font-openSans italic'>
                                 Verified
                               </p>
                             </div>

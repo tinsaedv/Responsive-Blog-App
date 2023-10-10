@@ -2,7 +2,6 @@ import { useArticleStore } from '../../../App/useArticleStore';
 import UpdateArticleQuill from './UpdateArticleQuill.component';
 import UpdateTags from './UpdateTags';
 import UpdateArticleForm from './UpdateArticleForm.component';
-import Footer from '../../Footer';
 import ThumbnailUploadInput from '../../Image Upload/ThumbnailUploadInput';
 
 const UpdateArticle = () => {
@@ -32,7 +31,6 @@ const UpdateArticle = () => {
       >
         Update
       </button>
-      <Footer />
     </main>
   );
 };

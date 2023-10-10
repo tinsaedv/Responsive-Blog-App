@@ -9,13 +9,6 @@ const ToggleSwitch = () => {
   }));
 
   const [isChecked, setIsChecked] = useState(false);
-  useEffect(() => {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setPageTheme('dark');
-    } else {
-      setPageTheme('light');
-    }
-  }, [setPageTheme]);
 
   useEffect(() => {
     if (pageTheme === 'light') {
@@ -25,25 +18,38 @@ const ToggleSwitch = () => {
     }
   }, [pageTheme]);
 
-  function handleThemeSwitch() {
-    setPageTheme(pageTheme === 'dark' ? 'light' : 'dark');
-    localStorage.setItem('Theme', JSON.stringify(pageTheme));
+  function handleThemeSwitch(e) {
+    const newTheme = e.target.checked ? 'dark' : 'light';
+    setIsChecked(e.target.checked);
+    setPageTheme(newTheme);
+    localStorage.setItem('Theme', JSON.stringify(newTheme));
   }
 
+  // Merge the first and third useEffect hooks
   useEffect(() => {
     const theme = localStorage.getItem('Theme');
     if (theme === '"dark"') {
       setIsChecked(true);
+      setPageTheme('dark');
+    } else if (theme === '"light"') {
+      setIsChecked(false);
+      setPageTheme('light');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsChecked(true);
+      setPageTheme('dark');
+    } else {
+      setIsChecked(false);
+      setPageTheme('light');
     }
-  }, [isChecked]);
+  }, [setPageTheme]);
 
   return (
     <div className='toggle-switch'>
       <label className='switch-label'>
         <input
-          onClick={handleThemeSwitch}
+          onChange={handleThemeSwitch}
           type='checkbox'
-          defaultChecked={isChecked}
+          checked={isChecked}
           className='checkbox'
         />
         <span className='slider'></span>

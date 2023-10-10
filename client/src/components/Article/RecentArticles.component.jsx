@@ -37,7 +37,7 @@ const RecentArticles = () => {
                   getArticleById(article?._id);
                 }}
                 key={article._id}
-                className='flex gap-3'
+                className='flex gap-3 dark:bg-slate-700 p-2 rounded-md'
               >
                 <div className='sm:w-[5rem] sm:h-[5rem] w-[3.5625rem] bg-slate-400 h-[3.6875rem] rounded-[0.75rem] overflow-hidden'>
                   <img
@@ -59,7 +59,7 @@ const RecentArticles = () => {
             ))}
         </div>
 
-        <h1 className='mb-[1.25rem] mt-[1.84rem] dark:text-white  text-[#0D2436] font-Roboto text-[1rem] font-medium'>
+        {/* <h1 className='mb-[1.25rem] mt-[1.84rem] dark:text-white  text-[#0D2436] font-Roboto text-[1rem] font-medium'>
           Tags
         </h1>
 
@@ -85,7 +85,7 @@ const RecentArticles = () => {
           <button className='px-[0.75rem] sm:text-[0.875rem] sm:py-[0.6rem] sm:px-[0.9rem] py-[0.44rem] font-Roboto text-[0.625rem] text-[white] rounded-md bg-[#1565D8]'>
             Education
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
