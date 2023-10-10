@@ -163,9 +163,7 @@ async function getAllArticles(req, res) {
         bio: '$articleAuthor.bio',
         author: '$articleAuthor.name',
         authorPic: '$articleAuthor.profilePicture',
-        verified: {
-          $arrayElemAt: ['$articleAuthor.stats.verified', 0],
-        },
+        verified: '$articleAuthor.stats.verified',
       },
     },
     // {
@@ -250,9 +248,7 @@ async function getArticlesById(req, res) {
           authorPic: '$Author.profilePicture',
           authorBio: '$Author.bio',
           authorProfession: '$Author.profession',
-          authorVerified: {
-            $arrayElemAt: ['$Author.stats.verified', 0],
-          },
+          authorVerified: '$articleAuthor.stats.verified',
         },
       },
     ]);
@@ -319,9 +315,7 @@ async function getArticlesByUserId(req, res) {
           articleAuthorId: 1,
           author: '$articleAuthor.name',
           authorPic: '$articleAuthor.profilePicture',
-          verified: {
-            $arrayElemAt: ['$articleAuthor.stats.verified', 0],
-          },
+          verified: '$articleAuthor.stats.verified',
         },
       },
     ]);
