@@ -43,12 +43,12 @@ const Settings = () => {
             onClick={() => {
               deleteAccount && deleteAccount(user?._id);
               navigate('/');
-              // window.location.reload();
+              window.location.reload();
               window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
               });
-              // localStorage.removeItem('User');
+              localStorage.removeItem('User');
             }}
           >
             Yes, I&apos;m sure
