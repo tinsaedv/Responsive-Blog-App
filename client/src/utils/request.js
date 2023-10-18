@@ -1,4 +1,4 @@
-const BASE_URL = 'https://blog-app-tinsae.onrender.com/api';
+const BASE_URL = 'http://localhost:4000/api';
 const Google_URL = 'http://localhost:4000/auth';
 
 async function postRequest(url, userData, token) {
