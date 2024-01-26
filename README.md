@@ -6,7 +6,7 @@ A simple full-stack blog application built using the MERN stack (MongoDB, Expres
 
 1. Clone the repository:
 
-   git clone https://github.com/your-username/mern-blog-app.git
+   git clone https://github.com/tinsaedv/Responsive-FullStack-Blog-App.git
 
 2. Navigate to the project directory:
 
