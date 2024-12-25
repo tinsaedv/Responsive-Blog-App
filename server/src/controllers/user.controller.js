@@ -8,11 +8,12 @@ const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
 // Function to create JWT tokens
-function createTokens(_id) {
-  // Get the JWT keys from the environment variables
-  const jwt_keys = process.env.JWT_KEYS;
-  // Sign a new JWT token with the user's ID and the JWT keys, set to expire in 3 days
-  return jwt.sign({ _id }, jwt_keys);
+function createTokens(userId, provider = 'email') {
+  const jwt_secret = process.env.JWT_SECRET;
+  if (!jwt_secret) {
+    throw new Error('JWT_SECRET not found in environment variables');
+  }
+  return jwt.sign({ userId, provider }, jwt_secret, { expiresIn: '3d' });
 }
 
 function verifyToken(req, res, next) {
